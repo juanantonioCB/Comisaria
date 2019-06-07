@@ -9,14 +9,13 @@ package view;
  *
  * @author Juan Antonio
  */
-public class GUIHome extends javax.swing.JFrame {
+public class GUIviewSuspect extends javax.swing.JPanel {
 
     /**
-     * Creates new form GUIHome
+     * Creates new form viewSuspect
      */
-    public GUIHome() {
+    public GUIviewSuspect() {
         initComponents();
-        
     }
 
     /**
@@ -28,18 +27,8 @@ public class GUIHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        head = new javax.swing.JPanel();
-        titleHead = new javax.swing.JLabel();
-        contentPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSuspects = new javax.swing.JTable();
-        optionsPanel = new javax.swing.JPanel();
-        inicioJpanelMenu = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        verSospechososMenu = new javax.swing.JPanel();
-        verSospechososLabel = new javax.swing.JLabel();
-        inicioJpanelMenu1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         viewSuspect_jScrollPane = new javax.swing.JScrollPane();
         viewSuspectPanel = new javax.swing.JPanel();
         nameSuspectLabel = new javax.swing.JLabel();
@@ -64,33 +53,10 @@ public class GUIHome extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         previousImageButton = new javax.swing.JButton();
         nextImageButton = new javax.swing.JButton();
+        textField1 = new java.awt.TextField();
+        rSButtonMetro1 = new rsbuttom.RSButtonMetro();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        head.setBackground(new java.awt.Color(152, 196, 2));
-
-        titleHead.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        titleHead.setForeground(new java.awt.Color(255, 255, 255));
-        titleHead.setText("Comisaría 0.1");
-
-        javax.swing.GroupLayout headLayout = new javax.swing.GroupLayout(head);
-        head.setLayout(headLayout);
-        headLayout.setHorizontalGroup(
-            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headLayout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(titleHead, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        headLayout.setVerticalGroup(
-            headLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(titleHead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
-        );
-
-        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         tableSuspects.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,99 +70,13 @@ public class GUIHome extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tableSuspects);
-        if (tableSuspects.getColumnModel().getColumnCount() > 0) {
-            tableSuspects.getColumnModel().getColumn(0).setResizable(false);
-            tableSuspects.getColumnModel().getColumn(1).setResizable(false);
-            tableSuspects.getColumnModel().getColumn(2).setResizable(false);
-            tableSuspects.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        optionsPanel.setBackground(new java.awt.Color(0, 0, 0));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel2.setText("INICIO");
-
-        javax.swing.GroupLayout inicioJpanelMenuLayout = new javax.swing.GroupLayout(inicioJpanelMenu);
-        inicioJpanelMenu.setLayout(inicioJpanelMenuLayout);
-        inicioJpanelMenuLayout.setHorizontalGroup(
-            inicioJpanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inicioJpanelMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        inicioJpanelMenuLayout.setVerticalGroup(
-            inicioJpanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inicioJpanelMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        verSospechososLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        verSospechososLabel.setText("Ver Sospechosos");
-
-        javax.swing.GroupLayout verSospechososMenuLayout = new javax.swing.GroupLayout(verSospechososMenu);
-        verSospechososMenu.setLayout(verSospechososMenuLayout);
-        verSospechososMenuLayout.setHorizontalGroup(
-            verSospechososMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(verSospechososMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(verSospechososLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        verSospechososMenuLayout.setVerticalGroup(
-            verSospechososMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(verSospechososMenuLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(verSospechososLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel3.setText("Sospechosos Relacionados");
-
-        javax.swing.GroupLayout inicioJpanelMenu1Layout = new javax.swing.GroupLayout(inicioJpanelMenu1);
-        inicioJpanelMenu1.setLayout(inicioJpanelMenu1Layout);
-        inicioJpanelMenu1Layout.setHorizontalGroup(
-            inicioJpanelMenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inicioJpanelMenu1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        inicioJpanelMenu1Layout.setVerticalGroup(
-            inicioJpanelMenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inicioJpanelMenu1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
-        optionsPanel.setLayout(optionsPanelLayout);
-        optionsPanelLayout.setHorizontalGroup(
-            optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(inicioJpanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(verSospechososMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(inicioJpanelMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        optionsPanelLayout.setVerticalGroup(
-            optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(inicioJpanelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(verSospechososMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inicioJpanelMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         viewSuspectPanel.setBackground(new java.awt.Color(255, 255, 204));
 
         nameSuspectLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nameSuspectLabel.setText("Información del Sospechoso");
+
+        jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jScrollPane2.setViewportView(licensePlatesList);
 
@@ -221,6 +101,8 @@ public class GUIHome extends javax.swing.JFrame {
         jScrollPane7.setViewportView(factsList);
 
         factsLabel.setText("HECHOS");
+
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         previousImageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/previous.png"))); // NOI18N
 
@@ -279,7 +161,7 @@ public class GUIHome extends javax.swing.JFrame {
                             .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                                 .addGap(102, 102, 102)
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         viewSuspectPanelLayout.setVerticalGroup(
             viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,99 +206,51 @@ public class GUIHome extends javax.swing.JFrame {
 
         viewSuspect_jScrollPane.setViewportView(viewSuspectPanel);
 
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(viewSuspect_jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1028, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(optionsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(contentPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(viewSuspect_jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        rSButtonMetro1.setBackground(new java.awt.Color(255, 255, 255));
+        rSButtonMetro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/search.png"))); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(head, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(viewSuspect_jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(head, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(viewSuspect_jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIHome().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel companionsLabel;
     private javax.swing.JList<String> companionsList;
-    private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel emailsLabel;
     private javax.swing.JList<String> emailsList;
     private javax.swing.JLabel factsLabel;
     private javax.swing.JList<String> factsList;
-    private javax.swing.JPanel head;
-    private javax.swing.JPanel inicioJpanelMenu;
-    private javax.swing.JPanel inicioJpanelMenu1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -428,16 +262,14 @@ public class GUIHome extends javax.swing.JFrame {
     private javax.swing.JLabel matriculasLabel;
     private javax.swing.JLabel nameSuspectLabel;
     private javax.swing.JButton nextImageButton;
-    private javax.swing.JPanel optionsPanel;
     private javax.swing.JLabel phoneNumbersLabel;
     private javax.swing.JList<String> phoneNumbersList1;
     private javax.swing.JButton previousImageButton;
+    private rsbuttom.RSButtonMetro rSButtonMetro1;
     private javax.swing.JLabel recordsLabel;
     private javax.swing.JList<String> recordsList;
     private javax.swing.JTable tableSuspects;
-    private javax.swing.JLabel titleHead;
-    private javax.swing.JLabel verSospechososLabel;
-    private javax.swing.JPanel verSospechososMenu;
+    private java.awt.TextField textField1;
     private javax.swing.JPanel viewSuspectPanel;
     private javax.swing.JScrollPane viewSuspect_jScrollPane;
     // End of variables declaration//GEN-END:variables
