@@ -87,7 +87,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="26" max="32767" attributes="0"/>
@@ -106,6 +106,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Comisar&#xed;a 0.1"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -119,7 +122,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="incioButton" max="32767" attributes="0"/>
+                  <Component id="inicioButton" max="32767" attributes="0"/>
                   <Component id="viewSuspectsButton" pref="261" max="32767" attributes="0"/>
                   <Component id="suspectsRelatedButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="addSuspect" alignment="0" max="32767" attributes="0"/>
@@ -130,7 +133,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="incioButton" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="inicioButton" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="viewSuspectsButton" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -145,7 +148,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="rsbuttom.RSButtonMetro" name="incioButton">
+            <Component class="rsbuttom.RSButtonMetro" name="inicioButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/view/icons/home.png"/>
@@ -154,8 +157,11 @@
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="incioButtonMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="inicioButtonMouseClicked"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="rsbuttom.RSButtonMetro" name="viewSuspectsButton">
               <Properties>
@@ -165,6 +171,9 @@
                 <Property name="text" type="java.lang.String" value="Ver Sospechosos"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="rsbuttom.RSButtonMetro" name="suspectsRelatedButton">
               <Properties>
@@ -174,6 +183,9 @@
                 <Property name="text" type="java.lang.String" value="Sospechosos Relacionados"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="rsbuttom.RSButtonMetro" name="addSuspect">
               <Properties>
@@ -183,6 +195,9 @@
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir Sospechoso"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="rsbuttom.RSButtonMetro" name="aboutButton">
               <Properties>
@@ -192,10 +207,16 @@
                 <Property name="text" type="java.lang.String" value="Acerca de"/>
                 <Property name="horizontalAlignment" type="int" value="2"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="contentPanel">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">

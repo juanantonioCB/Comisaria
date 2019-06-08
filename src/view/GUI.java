@@ -32,7 +32,7 @@ public class GUI extends javax.swing.JFrame {
         headJPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         menuJPanel = new javax.swing.JPanel();
-        incioButton = new rsbuttom.RSButtonMetro();
+        inicioButton = new rsbuttom.RSButtonMetro();
         viewSuspectsButton = new rsbuttom.RSButtonMetro();
         suspectsRelatedButton = new rsbuttom.RSButtonMetro();
         addSuspect = new rsbuttom.RSButtonMetro();
@@ -68,12 +68,12 @@ public class GUI extends javax.swing.JFrame {
 
         menuJPanel.setBackground(new java.awt.Color(255, 153, 153));
 
-        incioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/home.png"))); // NOI18N
-        incioButton.setText("Inicio");
-        incioButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        incioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        inicioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/home.png"))); // NOI18N
+        inicioButton.setText("Inicio");
+        inicioButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        inicioButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                incioButtonMouseClicked(evt);
+                inicioButtonMouseClicked(evt);
             }
         });
 
@@ -97,7 +97,7 @@ public class GUI extends javax.swing.JFrame {
         menuJPanel.setLayout(menuJPanelLayout);
         menuJPanelLayout.setHorizontalGroup(
             menuJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(incioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(inicioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(viewSuspectsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
             .addComponent(suspectsRelatedButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(addSuspect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,7 +107,7 @@ public class GUI extends javax.swing.JFrame {
             menuJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuJPanelLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(incioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inicioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(viewSuspectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,14 +166,9 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void incioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_incioButtonMouseClicked
-        GUIAddSuspect hp = new GUIAddSuspect();
-        hp.setSize(contentPanel.getWidth(), contentPanel.getHeight());
-        contentPanel.removeAll();
-        contentPanel.add(hp);
-        contentPanel.revalidate();
-        contentPanel.repaint();
-    }//GEN-LAST:event_incioButtonMouseClicked
+    private void inicioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioButtonMouseClicked
+        
+    }//GEN-LAST:event_inicioButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -211,15 +206,15 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rsbuttom.RSButtonMetro aboutButton;
-    private rsbuttom.RSButtonMetro addSuspect;
+    public rsbuttom.RSButtonMetro aboutButton;
+    public rsbuttom.RSButtonMetro addSuspect;
     private javax.swing.JPanel backgroundJPanel;
-    private javax.swing.JPanel contentPanel;
+    public javax.swing.JPanel contentPanel;
     private javax.swing.JPanel headJPanel;
-    private rsbuttom.RSButtonMetro incioButton;
-    private javax.swing.JLabel jLabel1;
+    public rsbuttom.RSButtonMetro inicioButton;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JPanel menuJPanel;
-    private rsbuttom.RSButtonMetro suspectsRelatedButton;
-    private rsbuttom.RSButtonMetro viewSuspectsButton;
+    public rsbuttom.RSButtonMetro suspectsRelatedButton;
+    public rsbuttom.RSButtonMetro viewSuspectsButton;
     // End of variables declaration//GEN-END:variables
 }

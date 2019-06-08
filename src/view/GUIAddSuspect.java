@@ -17,6 +17,7 @@ public class GUIAddSuspect extends javax.swing.JPanel {
     public GUIAddSuspect() {
         initComponents();
         
+        
     }
 
     /**
@@ -70,10 +71,14 @@ public class GUIAddSuspect extends javax.swing.JPanel {
         addResidenciesButton = new rsbuttom.RSButtonMetro();
         deleteResidenciesButton = new rsbuttom.RSButtonMetro();
         companionsLabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        companionsTable = new javax.swing.JTable();
         addCompanionButton = new rsbuttom.RSButtonMetro();
         deleteCompanionButton = new rsbuttom.RSButtonMetro();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        companionsListAdd = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        companionsList1 = new javax.swing.JList<>();
+        birthdateLabel = new javax.swing.JLabel();
+        birthdateTextField = new javax.swing.JTextField();
 
         background.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,34 +150,16 @@ public class GUIAddSuspect extends javax.swing.JPanel {
         companionsLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         companionsLabel.setText("ACOMPAÑANTES");
 
-        companionsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "ID", "NOMBRE"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(companionsTable);
-        if (companionsTable.getColumnModel().getColumnCount() > 0) {
-            companionsTable.getColumnModel().getColumn(0).setResizable(false);
-            companionsTable.getColumnModel().getColumn(0).setPreferredWidth(25);
-        }
-
         addCompanionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
 
         deleteCompanionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/delete.png"))); // NOI18N
+
+        jScrollPane3.setViewportView(companionsListAdd);
+
+        jScrollPane4.setViewportView(companionsList1);
+
+        birthdateLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        birthdateLabel.setText("Fecha Nacimiento");
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -181,12 +168,6 @@ public class GUIAddSuspect extends javax.swing.JPanel {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(addEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(backgroundLayout.createSequentialGroup()
@@ -241,15 +222,26 @@ public class GUIAddSuspect extends javax.swing.JPanel {
                                         .addComponent(jLabel4))))
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addGap(68, 68, 68)
-                                .addComponent(licensePlacesLabel1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                                .addComponent(licensePlacesLabel1))
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGap(437, 437, 437)
+                                .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                                .addComponent(licensePlatesListScroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(203, 203, 203))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                 .addComponent(residenciesLabel)
-                                .addGap(338, 338, 338))))))
+                                .addGap(338, 338, 338))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(licensePlatesListScroll3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(206, 206, 206))))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(226, 226, 226)
+                        .addComponent(addEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
@@ -276,7 +268,11 @@ public class GUIAddSuspect extends javax.swing.JPanel {
                                 .addGroup(backgroundLayout.createSequentialGroup()
                                     .addComponent(surname2Label)
                                     .addGap(18, 18, 18)
-                                    .addComponent(surname2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(surname2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(backgroundLayout.createSequentialGroup()
+                                    .addComponent(birthdateLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
@@ -290,14 +286,12 @@ public class GUIAddSuspect extends javax.swing.JPanel {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(179, 179, 179)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(addCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(387, 387, 387)
+                        .addGap(449, 449, 449)
                         .addComponent(companionsLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -307,6 +301,14 @@ public class GUIAddSuspect extends javax.swing.JPanel {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nextPhotoButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(previousPhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rSButtonMetro1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)))
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -326,15 +328,11 @@ public class GUIAddSuspect extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(dniLabel)
-                                    .addComponent(dniTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(backgroundLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nextPhotoButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(previousPhotoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rSButtonMetro1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
+                                    .addComponent(dniTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(birthdateLabel)
+                                    .addComponent(birthdateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(29, 29, 29)
                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(backgroundLayout.createSequentialGroup()
@@ -393,13 +391,14 @@ public class GUIAddSuspect extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(companionsLabel)
                 .addGap(18, 18, 18)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addComponent(addCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(background);
@@ -422,51 +421,55 @@ public class GUIAddSuspect extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rsbuttom.RSButtonMetro addCompanionButton;
-    private rsbuttom.RSButtonMetro addEmailButton;
-    private rsbuttom.RSButtonMetro addLicensePlatesButton;
-    private rsbuttom.RSButtonMetro addPhoneNumberButton;
-    private rsbuttom.RSButtonMetro addResidenciesButton;
+    public rsbuttom.RSButtonMetro addCompanionButton;
+    public rsbuttom.RSButtonMetro addEmailButton;
+    public rsbuttom.RSButtonMetro addLicensePlatesButton;
+    public rsbuttom.RSButtonMetro addPhoneNumberButton;
+    public rsbuttom.RSButtonMetro addResidenciesButton;
     private javax.swing.JPanel background;
+    private javax.swing.JLabel birthdateLabel;
+    public javax.swing.JTextField birthdateTextField;
     private javax.swing.JLabel companionsLabel;
-    private javax.swing.JTable companionsTable;
-    private rsbuttom.RSButtonMetro deleteCompanionButton;
-    private rsbuttom.RSButtonMetro deleteEmailButton;
-    private rsbuttom.RSButtonMetro deleteLicensePlateButton;
+    public javax.swing.JList<String> companionsList1;
+    public javax.swing.JList<String> companionsListAdd;
+    public rsbuttom.RSButtonMetro deleteCompanionButton;
+    public rsbuttom.RSButtonMetro deleteEmailButton;
+    public rsbuttom.RSButtonMetro deleteLicensePlateButton;
     private rsbuttom.RSButtonMetro deletePhoneNumberButton;
-    private rsbuttom.RSButtonMetro deleteResidenciesButton;
+    public rsbuttom.RSButtonMetro deleteResidenciesButton;
     private javax.swing.JLabel dniLabel;
-    private javax.swing.JTextField dniTextField;
-    private javax.swing.JList<String> emailsList;
-    private javax.swing.JTextField emailsTextField;
+    public javax.swing.JTextField dniTextField;
+    public javax.swing.JList<String> emailsList;
+    public javax.swing.JTextField emailsTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel licensePlacesLabel;
     private javax.swing.JLabel licensePlacesLabel1;
-    private javax.swing.JList<String> licensePlatesList;
+    public javax.swing.JList<String> licensePlatesList;
     private javax.swing.JScrollPane licensePlatesListScroll;
     private javax.swing.JScrollPane licensePlatesListScroll1;
     private javax.swing.JScrollPane licensePlatesListScroll2;
     private javax.swing.JScrollPane licensePlatesListScroll3;
-    private javax.swing.JTextField licensePlatesTextField;
-    private javax.swing.JTextField nameTextField;
-    private rsbuttom.RSButtonMetro nextPhotoButton1;
+    public javax.swing.JTextField licensePlatesTextField;
+    public javax.swing.JTextField nameTextField;
+    public rsbuttom.RSButtonMetro nextPhotoButton1;
     private javax.swing.JLabel phoneNumbersLabel;
-    private javax.swing.JList<String> phoneNumbersList;
-    private javax.swing.JTextField phoneNumbersTextField;
-    private rsbuttom.RSButtonMetro previousPhotoButton;
-    private rsbuttom.RSButtonMetro rSButtonMetro1;
+    public javax.swing.JList<String> phoneNumbersList;
+    public javax.swing.JTextField phoneNumbersTextField;
+    public rsbuttom.RSButtonMetro previousPhotoButton;
+    public rsbuttom.RSButtonMetro rSButtonMetro1;
     private javax.swing.JLabel residenciesLabel;
-    private javax.swing.JList<String> residenciesList;
+    public javax.swing.JList<String> residenciesList;
     private javax.swing.JLabel surname1Label;
-    private javax.swing.JTextField surname1TextField;
+    public javax.swing.JTextField surname1TextField;
     private javax.swing.JLabel surname2Label;
-    private javax.swing.JTextField surname2TextField;
+    public javax.swing.JTextField surname2TextField;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
