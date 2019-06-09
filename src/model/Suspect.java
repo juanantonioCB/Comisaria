@@ -16,7 +16,7 @@ public class Suspect {
     private ArrayList Residencies;
     private ArrayList licensePlates;
     private ArrayList emails;
-    private ArrayList companions;
+    private ArrayList<Suspect> companions;
     private ArrayList phoneNumbers;
     private String records;
     private String facts;
@@ -221,20 +221,7 @@ public class Suspect {
     
     @Override
     public String toString(){
-        return "-----------------\n"
-                +this.id+"\n"
-                +this.Name+"\n"
-                +this.Surname1+"\n"
-                +this.Surname2+"\n"
-                +this.DNI+"\n"
-                +this.licensePlates+"\n"
-                +this.Residencies+"\n"
-                +this.phoneNumbers+"\n"
-                +this.emails.toString()+"\n"
-                +this.companions+"\n"
-                +this.records+"\n"
-                +this.facts+"\n"
-                +"FOTO ---"+this.photos;
+        return this.Name+" "+this.Surname1+" "+this.Surname2;
     }
 
     /**

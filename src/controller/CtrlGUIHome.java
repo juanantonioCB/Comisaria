@@ -12,7 +12,7 @@ import view.*;
  */
 public class CtrlGUIHome implements ActionListener {
 
-    GUI gui;
+    GUIHome gui;
     GUIAddSuspect addSuspect;
     GUIHomePanel homePanel;
     GUIviewSuspect viewSuspect;
@@ -20,12 +20,7 @@ public class CtrlGUIHome implements ActionListener {
     Suspect suspect;
 
     public CtrlGUIHome() {
-        this.gui = new GUI();
-        this.addSuspect = new GUIAddSuspect();
-        this.homePanel = new GUIHomePanel();
-        this.viewSuspect = new GUIviewSuspect();
-        this.consults = Consults.getConsults();
-
+        this.gui = new GUIHome();
         this.gui.inicioButton.addActionListener(this);
         this.gui.addSuspect.addActionListener(this);
         this.gui.suspectsRelatedButton.addActionListener(this);
@@ -33,49 +28,57 @@ public class CtrlGUIHome implements ActionListener {
         this.gui.viewSuspectsButton.addActionListener(this);
     }
 
-    public void start() {
-        this.gui.setTitle("Comisaria 0.1");
-        this.gui.setVisible(true);
-        this.homePanel.setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
-        this.gui.contentPanel.removeAll();
-        this.gui.contentPanel.add(this.homePanel);
-        this.gui.contentPanel.revalidate();
-        this.gui.contentPanel.repaint();
+    public void start() throws Exception {
+
+        if (CtrlHomePanel.getGuiHomePanel() == null
+                || CtrlAddSuspect.getGuiAddSuspect() == null
+                || CtrlViewSuspect.getGuiViewSuspect() == null) {
+            throw new Exception("Algun controlador no ha sido instanciado");
+
+        } else {
+
+            this.gui.setTitle("Comisaria 0.1");
+            this.gui.setVisible(true);
+
+            CtrlHomePanel.getGuiHomePanel().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
+            this.gui.contentPanel.removeAll();
+            this.gui.contentPanel.add(CtrlHomePanel.getGuiHomePanel());
+            this.gui.contentPanel.revalidate();
+            this.gui.contentPanel.repaint();
+        }
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.gui.inicioButton) {
-            this.homePanel.setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
+            CtrlHomePanel.getGuiHomePanel().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
             this.gui.contentPanel.removeAll();
-            this.gui.contentPanel.add(this.homePanel);
-            this.gui.contentPanel.revalidate();
-            this.gui.contentPanel.repaint();
-        } 
-        
-        if(e.getSource()==this.gui.viewSuspectsButton){
-            this.viewSuspect.setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
-            this.gui.contentPanel.removeAll();
-            this.gui.contentPanel.add(this.viewSuspect);
+            this.gui.contentPanel.add(CtrlHomePanel.getGuiHomePanel());
             this.gui.contentPanel.revalidate();
             this.gui.contentPanel.repaint();
         }
-        
-        if (e.getSource()==this.gui.addSuspect){
-            this.addSuspect.setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
+
+        if (e.getSource() == this.gui.viewSuspectsButton) {
+            CtrlViewSuspect.getGuiViewSuspect().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
             this.gui.contentPanel.removeAll();
-            this.gui.contentPanel.add(this.addSuspect);
+            this.gui.contentPanel.add(CtrlViewSuspect.getGuiViewSuspect());
             this.gui.contentPanel.revalidate();
             this.gui.contentPanel.repaint();
         }
-        
-        if(e.getSource()==this.gui.aboutButton){
-            
+
+        if (e.getSource() == this.gui.addSuspect) {
+            CtrlAddSuspect.getGuiAddSuspect().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
+            this.gui.contentPanel.removeAll();
+            this.gui.contentPanel.add(CtrlAddSuspect.getGuiAddSuspect());
+            this.gui.contentPanel.revalidate();
+            this.gui.contentPanel.repaint();
         }
-        
+
+        if (e.getSource() == this.gui.aboutButton) {
+
+        }
 
     }
-    
-
 
 }

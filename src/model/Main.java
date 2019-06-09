@@ -1,6 +1,13 @@
 package model;
 
+import controller.CtrlAddSuspect;
 import controller.CtrlGUIHome;
+import controller.CtrlHomePanel;
+import controller.CtrlViewSuspect;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -8,9 +15,27 @@ import controller.CtrlGUIHome;
  */
 public class Main {
 
-    public static void main(String[] args){
-        CtrlGUIHome ctrl = new CtrlGUIHome();
-        ctrl.start();
+    public static void main(String[] args) throws SQLException{
+        CtrlGUIHome ctrlGUI = new CtrlGUIHome();
+        CtrlAddSuspect ctrlAddSuspect = new CtrlAddSuspect();
+        CtrlHomePanel ctrlHome = new CtrlHomePanel();
+        CtrlViewSuspect ctrlViewSuspect = new CtrlViewSuspect();
+        try {
+            ctrlGUI.start();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        Consults consults = Consults.getConsults();
+        
+       /*ArrayList<Suspect> s = consults.getSuspects();
+       for(int i=0;i<s.size();i++){
+           if(s.get(i).getId()==139){
+               System.out.println(s.get(i).getCompanions());
+           }
+       }*/
+        
         
     }
 }

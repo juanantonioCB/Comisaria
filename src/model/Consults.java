@@ -9,21 +9,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-
-
 /**
  *
  * @author Juan Antonio
  */
 public class Consults extends Connect {
-    
-    private static Consults consults=null;
-    
-    private Consults(){
+
+    private static Consults consults = null;
+
+    private Consults() {
     }
-    
-    public static Consults getConsults(){
-        if(consults==null){
+
+    public static Consults getConsults() {
+        if (consults == null) {
             consults = new Consults();
         }
         return consults;
@@ -34,10 +32,11 @@ public class Consults extends Connect {
         String sql = "INSERT INTO Sospechosos (nombre, apellido1, apellido2, dni"
                 + ", antecedentes, hechos) values (?,?,?,?,?,?)";
         String sqlLicensePlates = "INSERT INTO matriculas (matricula, idSospechoso) values (?,?)";
-        String sqlResidencies = "INSERT INTO residencies (residencie, idSospechoso) values (?,?)";
+        String sqlResidencies = "INSERT INTO residencias (residencia, idSospechoso) values (?,?)";
         String sqlEmails = "INSERT INTO emails (email, idSospechoso) values (?,?)";
         String sqlPhoneNumbers = "INSERT INTO telefonos (telefono, idSospechoso) values (?,?)";
         String sqlPhotos = "INSERT INTO fotos (foto, idSospechoso) values (?,?)";
+        String sqlCompanions = "INSERT INTO acompañantes values (?,?)";
         int last_inserted_id = -1;
 
         try {
@@ -64,7 +63,7 @@ public class Consults extends Connect {
                     ps.setString(1, (String) s.getLicensePlates().get(i));
                     ps.setInt(2, last_inserted_id);
                     ps.execute();
-                    
+
                 }
             } catch (SQLException ex) {
                 System.err.print(ex);
@@ -73,9 +72,9 @@ public class Consults extends Connect {
         //RESIDENCIAS
         if (s.getResidencies() != null) {
             try {
-                PreparedStatement ps = con.prepareStatement(sqlLicensePlates);
-                for (int i = 0; i < s.getLicensePlates().size(); i++) {
-                    ps.setString(1, (String) s.getLicensePlates().get(i));
+                PreparedStatement ps = con.prepareStatement(sqlResidencies);
+                for (int i = 0; i < s.getResidencies().size(); i++) {
+                    ps.setString(1, (String) s.getResidencies().get(i));
                     ps.setInt(2, last_inserted_id);
                     ps.execute();
                 }
@@ -99,7 +98,7 @@ public class Consults extends Connect {
         //TELEFONOS
         if (s.getPhoneNumbers() != null) {
             try {
-                PreparedStatement ps = con.prepareStatement(sqlEmails);
+                PreparedStatement ps = con.prepareStatement(sqlPhoneNumbers);
                 for (int i = 0; i < s.getPhoneNumbers().size(); i++) {
                     ps.setString(1, (String) s.getPhoneNumbers().get(i));
                     ps.setInt(2, last_inserted_id);
@@ -109,12 +108,27 @@ public class Consults extends Connect {
                 System.err.print(ex);
             }
         }
-        
+
+        //ACOMPAÑANTES
+        if (s.getCompanions() != null) {
+            try {
+                PreparedStatement ps = con.prepareStatement(sqlCompanions);
+                for (int i = 0; i < s.getCompanions().size(); i++) {
+                    Suspect c = (Suspect) s.getCompanions().get(i);
+                    ps.setInt(1, last_inserted_id);
+                    ps.setInt(2, c.getId());
+                    ps.execute();
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex);
+            }
+        }
+
         //FOTOS
-        if(s.getPhoto()!=null){
+        if (s.getPhoto() != null) {
             try {
                 PreparedStatement ps = con.prepareStatement(sqlPhotos);
-                for(int i = 0;i<s.getPhoto().size();i++){
+                for (int i = 0; i < s.getPhoto().size(); i++) {
                     ps.setBytes(1, s.getPhoto().get(i));
                     ps.setInt(2, last_inserted_id);
                     ps.execute();
@@ -124,19 +138,21 @@ public class Consults extends Connect {
             }
         }
         super.disconnect();
-        
+
     }
+
     /**
      * Relaciona compañeros con sospechosos
+     *
      * @param idSuspect id del sospechoso
      * @param idCompanion id del acompañante que vamos a agregar al sospechoso
      */
-    public void addCompanion(int idSuspect, int idCompanion){
+    public void addCompanion(int idSuspect, int idCompanion) {
         try {
             Connection con = getConnect();
             String sql = "INSERT INTO acompañantes (id1, id2) values (?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,idSuspect);
+            ps.setInt(1, idSuspect);
             ps.setInt(2, idCompanion);
             ps.execute();
         } catch (SQLException ex) {
@@ -144,8 +160,8 @@ public class Consults extends Connect {
         }
         super.disconnect();
     }
-    
-    public void deleteSuspect(int id){
+
+    public void deleteSuspect(int id) {
         try {
             Connection con = getConnect();
             String sql = "DELETE FROM Sospechosos where id = ?";
@@ -157,42 +173,42 @@ public class Consults extends Connect {
         }
         super.disconnect();
     }
-    
-    public ArrayList<Suspect> getSuspects(){
+
+    public ArrayList<Suspect> getSuspects() {
         try {
             ArrayList<Suspect> suspects = new ArrayList<>();
-            String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n" +
-                    "s.apellido2, s.dni, s.antecedentes, s.hechos,\n" +
-                    "m.matricula, r.residencia, t.telefono, \n" +
-                    "e.email, f.foto FROM sospechosos AS s LEFT JOIN emails AS e \n" +
-                    "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t \n" +
-                    "ON t.idSospechoso=s.id LEFT JOIN residencias AS r \n" +
-                    "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n" +
-                    "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n" +
-                    "ON f.idSospechoso=s.id";
+            String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
+                    + "s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
+                    + "m.matricula, r.residencia, t.telefono, \n"
+                    + "e.email, f.foto, a.id2 FROM sospechosos AS s LEFT JOIN emails AS e \n"
+                    + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t\n"
+                    + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r\n"
+                    + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
+                    + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
+                    + "ON f.idSospechoso=s.id  LEFT JOIN acompañantes as a\n"
+                    + "ON a.id1=s.id";
             Connection con = getConnect();
             Statement conexion = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            
+
             ResultSet rs = conexion.executeQuery(SqlQuery);
-            
+
             //ITERAMOS UNA VEZ
             HashSet<String> correos = new HashSet<>();
             HashSet<String> matriculas = new HashSet<>();
             HashSet<String> residencias = new HashSet<>();
             HashSet<String> telefonos = new HashSet<>();
             HashSet<byte[]> fotos = new HashSet<>();
-            
+            HashSet<Suspect> companions = new HashSet<>();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 do {
                     if (rs.getInt("id") != id) {
-                        
+
                         rs.previous();
-                        
+
                         //SACAMOS LA FOTO Y LA CONVERTIMOS A UN ARRAY DE BYTES
-                        
                         Blob blob = rs.getBlob("foto");
-                        
+
                         byte[] blobAsBytes = null;
                         if (blob != null) {
                             int blobLength = (int) blob.length();
@@ -200,7 +216,7 @@ public class Consults extends Connect {
                             //release the blob and free up memory. (since JDBC 4.0)
                             blob.free();
                             fotos.add(blobAsBytes);
-                            
+
                         }
                         Suspect nuevo = new Suspect(rs.getInt("id"),
                                 rs.getString("nombre"),
@@ -208,7 +224,7 @@ public class Consults extends Connect {
                                 new ArrayList<>(matriculas), new ArrayList<>(residencias),
                                 new ArrayList<>(telefonos),
                                 new ArrayList<>(correos),
-                                null,
+                                new ArrayList<Suspect>(companions),
                                 rs.getString("antecedentes"), rs.getString("hechos"),
                                 new ArrayList<>(fotos)
                         );
@@ -219,14 +235,17 @@ public class Consults extends Connect {
                         matriculas = new HashSet<>();
                         telefonos = new HashSet<>();
                         residencias = new HashSet<>();
+                        fotos = new HashSet<>();
+                        companions = new HashSet<>();
                         rs.previous();
                     } else {
                         //hay que recoorrer las filas pertenecientes al mismo sujeto creando los arraylist correspondientes.
-                        
+
                         correos.add(rs.getString("email"));
                         matriculas.add(rs.getString("matricula"));
                         telefonos.add(rs.getString("telefono"));
                         residencias.add(rs.getString("residencia"));
+                        companions.add(getSuspectFromBBDD(rs.getInt("id2")));
                     }
                 } while (rs.next());
             }
@@ -241,19 +260,19 @@ public class Consults extends Connect {
                 blob.free();
                 fotos.add(blobAsBytes);
             }
-            
+
             Suspect nuevo = new Suspect(rs.getInt("id"),
                     rs.getString("nombre"),
                     rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
                     new ArrayList<>(matriculas), new ArrayList<>(residencias),
                     new ArrayList<>(telefonos),
                     new ArrayList<>(correos),
-                    null,
+                    new ArrayList<>(companions),
                     rs.getString("antecedentes"), rs.getString("hechos"),
                     new ArrayList<>(fotos)
             );
             suspects.add(nuevo);
-            
+            super.disconnect();
             if (suspects.size() == 0) {
                 return null;
             } else {
@@ -263,6 +282,59 @@ public class Consults extends Connect {
             return null;
         }
     }
-    
-    
+
+    public Suspect getSuspectFromBBDD(int idToSearch) throws SQLException {
+        Suspect s = null;
+
+        String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
+                + "                    s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
+                + "m.matricula, r.residencia, t.telefono, \n"
+                + "e.email, f.foto FROM sospechosos AS s LEFT JOIN emails AS e \n"
+                + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t \n"
+                + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r \n"
+                + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
+                + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
+                + "ON f.idSospechoso=s.id\n"
+                + "where s.id = " + idToSearch;
+
+        Connection con = getConnect();
+        Statement conexion = con.createStatement();
+        ResultSet rs = conexion.executeQuery(SqlQuery);
+        //ITERAMOS UNA VEZ
+        HashSet<String> correos = new HashSet<>();
+        HashSet<String> matriculas = new HashSet<>();
+        HashSet<String> residencias = new HashSet<>();
+        HashSet<String> telefonos = new HashSet<>();
+        HashSet<byte[]> fotos = new HashSet<>();
+        while (rs.next()) {
+            correos.add(rs.getString("email"));
+            matriculas.add(rs.getString("matricula"));
+            residencias.add(rs.getString("residencia"));
+            telefonos.add(rs.getString("telefono"));
+            fotos.add((rs.getBytes("foto")));
+
+            if (rs.isLast()) {
+                Blob blob = rs.getBlob("foto");
+                byte[] blobAsBytes = null;
+                if (blob != null) {
+                    int blobLength = (int) blob.length();
+                    blobAsBytes = blob.getBytes(1, blobLength);
+                    //release the blob and free up memory. (since JDBC 4.0)
+                    blob.free();
+                }
+                s = new Suspect(rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
+                        new ArrayList<>(matriculas), new ArrayList<>(residencias),
+                        new ArrayList<>(telefonos),
+                        new ArrayList<>(correos),
+                        null,
+                        rs.getString("antecedentes"), rs.getString("hechos"),
+                        new ArrayList<>(fotos));
+            }
+        }
+        super.disconnect();
+        return s;
+    }
+
 }
