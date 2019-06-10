@@ -16,25 +16,24 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) throws SQLException{
-        CtrlGUIHome ctrlGUI = new CtrlGUIHome();
+        /*CtrlGUIHome ctrlGUI = new CtrlGUIHome();
         CtrlAddSuspect ctrlAddSuspect = new CtrlAddSuspect();
         CtrlHomePanel ctrlHome = new CtrlHomePanel();
         CtrlViewSuspect ctrlViewSuspect = new CtrlViewSuspect();
+
         try {
             ctrlGUI.start();
+
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }*/
         
         Consults consults = Consults.getConsults();
+        System.out.println(consults.searchSuspect("raul").size());
+                
         
-       /*ArrayList<Suspect> s = consults.getSuspects();
-       for(int i=0;i<s.size();i++){
-           if(s.get(i).getId()==139){
-               System.out.println(s.get(i).getCompanions());
-           }
-       }*/
+        
+        
         
         
     }

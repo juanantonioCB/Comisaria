@@ -176,18 +176,44 @@ public class Consults extends Connect {
         super.disconnect();
     }
 
+    public ArrayList<byte[]> getPhotos(int id) {
+        ArrayList<byte[]> images = new ArrayList<>();
+        try {
+            String sqlQuery = "SELECT FOTO FROM FOTOS WHERE idsospechoso=" + id;
+            Connection con = getConnect();
+            Statement conexion = con.createStatement();
+            ResultSet rs = conexion.executeQuery(sqlQuery);
+            while (rs.next()) {
+                byte[] blobAsBytes = null;
+                Blob blob = rs.getBlob("foto");
+                int blobLength = (int) blob.length();
+                blobAsBytes = blob.getBytes(1, blobLength);
+                blob.free();
+                images.add(blobAsBytes);
+            }
+            if (images.size() == 0) {
+                return null;
+            } else {
+                return images;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Consults.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return images;
+    }
+
     public ArrayList<Suspect> getSuspects() {
         try {
             ArrayList<Suspect> suspects = new ArrayList<>();
             String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
                     + "s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
                     + "m.matricula, r.residencia, t.telefono, \n"
-                    + "e.email, f.foto, a.id2 FROM sospechosos AS s LEFT JOIN emails AS e \n"
+                    + "e.email, a.id2 FROM sospechosos AS s LEFT JOIN emails AS e \n"
                     + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t\n"
                     + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r\n"
                     + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
-                    + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
-                    + "ON f.idSospechoso=s.id  LEFT JOIN acompañantes as a\n"
+                    + "ON m.idSospechoso=s.id LEFT JOIN acompañantes as a\n"
                     + "ON a.id1=s.id";
             Connection con = getConnect();
             Statement conexion = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -205,21 +231,8 @@ public class Consults extends Connect {
                 int id = rs.getInt("id");
                 do {
                     if (rs.getInt("id") != id) {
-
                         rs.previous();
 
-                        //SACAMOS LA FOTO Y LA CONVERTIMOS A UN ARRAY DE BYTES
-                        Blob blob = rs.getBlob("foto");
-
-                        byte[] blobAsBytes = null;
-                        if (blob != null) {
-                            int blobLength = (int) blob.length();
-                            blobAsBytes = blob.getBytes(1, blobLength);
-                            //release the blob and free up memory. (since JDBC 4.0)
-                            blob.free();
-                            fotos.add(blobAsBytes);
-
-                        }
                         Suspect nuevo = new Suspect(rs.getInt("id"),
                                 rs.getString("nombre"),
                                 rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
@@ -228,7 +241,7 @@ public class Consults extends Connect {
                                 new ArrayList<>(correos),
                                 new ArrayList<Suspect>(companions),
                                 rs.getString("antecedentes"), rs.getString("hechos"),
-                                new ArrayList<>(fotos)
+                                null
                         );
                         suspects.add(nuevo);
                         rs.next();
@@ -253,15 +266,6 @@ public class Consults extends Connect {
             }
             //insert last one
             rs.previous();
-            Blob blob = rs.getBlob("foto");
-            byte[] blobAsBytes = null;
-            if (blob != null) {
-                int blobLength = (int) blob.length();
-                blobAsBytes = blob.getBytes(1, blobLength);
-                //release the blob and free up memory. (since JDBC 4.0)
-                blob.free();
-                fotos.add(blobAsBytes);
-            }
 
             Suspect nuevo = new Suspect(rs.getInt("id"),
                     rs.getString("nombre"),
@@ -271,7 +275,7 @@ public class Consults extends Connect {
                     new ArrayList<>(correos),
                     new ArrayList<>(companions),
                     rs.getString("antecedentes"), rs.getString("hechos"),
-                    new ArrayList<>(fotos)
+                    null
             );
             suspects.add(nuevo);
             super.disconnect();
@@ -285,10 +289,98 @@ public class Consults extends Connect {
         }
     }
 
-    public Suspect getSuspectFromBBDD(int idToSearch){
+    public ArrayList<Suspect> searchSuspect(String search) {
+        try {
+            ArrayList<Suspect> suspects = new ArrayList<>();
+            String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
+                    + "s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
+                    + "m.matricula, r.residencia, t.telefono, \n"
+                    + "e.email, a.id2 FROM sospechosos AS s LEFT JOIN emails AS e \n"
+                    + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t\n"
+                    + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r\n"
+                    + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m\n"
+                    + "ON m.idSospechoso=s.id LEFT JOIN acompañantes as a\n"
+                    + "ON a.id1=s.id\n"
+                    + "where concat(UPPER(nombre),' ',UPPER(apellido1), ' ', UPPER(apellido2)) like UPPER('%"+search+"%') OR\n"
+                    + "dni like '"+search+"'";
+            Connection con = getConnect();
+            Statement conexion = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = conexion.executeQuery(SqlQuery);
+
+            //ITERAMOS UNA VEZ
+            HashSet<String> correos = new HashSet<>();
+            HashSet<String> matriculas = new HashSet<>();
+            HashSet<String> residencias = new HashSet<>();
+            HashSet<String> telefonos = new HashSet<>();
+            HashSet<byte[]> fotos = new HashSet<>();
+            HashSet<Suspect> companions = new HashSet<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                do {
+                    if (rs.getInt("id") != id) {
+                        rs.previous();
+
+                        Suspect nuevo = new Suspect(rs.getInt("id"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
+                                new ArrayList<>(matriculas), new ArrayList<>(residencias),
+                                new ArrayList<>(telefonos),
+                                new ArrayList<>(correos),
+                                new ArrayList<Suspect>(companions),
+                                rs.getString("antecedentes"), rs.getString("hechos"),
+                                null
+                        );
+                        suspects.add(nuevo);
+                        rs.next();
+                        id = rs.getInt("id");
+                        correos = new HashSet<>();
+                        matriculas = new HashSet<>();
+                        telefonos = new HashSet<>();
+                        residencias = new HashSet<>();
+                        fotos = new HashSet<>();
+                        companions = new HashSet<>();
+                        rs.previous();
+                    } else {
+                        //hay que recoorrer las filas pertenecientes al mismo sujeto creando los arraylist correspondientes.
+
+                        correos.add(rs.getString("email"));
+                        matriculas.add(rs.getString("matricula"));
+                        telefonos.add(rs.getString("telefono"));
+                        residencias.add(rs.getString("residencia"));
+                        companions.add(getSuspectFromBBDD(rs.getInt("id2")));
+                    }
+                } while (rs.next());
+            }
+            //insert last one
+            rs.previous();
+
+            Suspect nuevo = new Suspect(rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
+                    new ArrayList<>(matriculas), new ArrayList<>(residencias),
+                    new ArrayList<>(telefonos),
+                    new ArrayList<>(correos),
+                    new ArrayList<>(companions),
+                    rs.getString("antecedentes"), rs.getString("hechos"),
+                    null
+            );
+            suspects.add(nuevo);
+            super.disconnect();
+            if (suspects.size() == 0) {
+                return null;
+            } else {
+                return suspects;
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public Suspect getSuspectFromBBDD(int idToSearch) {
         try {
             Suspect s = null;
-            
+
             String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
                     + "                    s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
                     + "m.matricula, r.residencia, t.telefono, \n"
@@ -299,7 +391,7 @@ public class Consults extends Connect {
                     + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
                     + "ON f.idSospechoso=s.id\n"
                     + "where s.id = " + idToSearch;
-            
+
             Connection con = getConnect();
             Statement conexion = con.createStatement();
             ResultSet rs = conexion.executeQuery(SqlQuery);
@@ -315,7 +407,7 @@ public class Consults extends Connect {
                 residencias.add(rs.getString("residencia"));
                 telefonos.add(rs.getString("telefono"));
                 fotos.add((rs.getBytes("foto")));
-                
+
                 if (rs.isLast()) {
                     Blob blob = rs.getBlob("foto");
                     byte[] blobAsBytes = null;
