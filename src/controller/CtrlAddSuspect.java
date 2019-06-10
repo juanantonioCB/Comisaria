@@ -1,9 +1,8 @@
 package controller;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 
 import javax.swing.ImageIcon;
@@ -26,7 +24,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.Consults;
 import model.Suspect;
-import view.GUIAddResidencie;
 import view.GUIAddSuspect;
 
 /**
@@ -135,13 +132,13 @@ public class CtrlAddSuspect implements ActionListener {
             }
         }
         if (e.getSource() == guiAddSuspect.addResidenciesButton) {
-            if(guiAddSuspect.residencieTextField.getText().length()>0){
+            if (guiAddSuspect.residencieTextField.getText().length() > 0) {
                 guiAddSuspect.residenciesList.add(guiAddSuspect.residencieTextField.getText());
                 guiAddSuspect.residencieTextField.setText(null);
             }
         }
-        if(e.getSource()==guiAddSuspect.deleteResidenciesButton){
-            if(guiAddSuspect.residenciesList.getSelectedIndex()!=-1){ 
+        if (e.getSource() == guiAddSuspect.deleteResidenciesButton) {
+            if (guiAddSuspect.residenciesList.getSelectedIndex() != -1) {
                 guiAddSuspect.residenciesList.remove(guiAddSuspect.residenciesList.getSelectedIndex());
             }
         }
@@ -153,15 +150,9 @@ public class CtrlAddSuspect implements ActionListener {
             switch (option) {
                 case "next":
                     if (iterator.hasNext()) {
-
-                        ByteArrayInputStream bais = new ByteArrayInputStream(photos.get(0));
-                        try {
-                            BufferedImage image = ImageIO.read(bais);
-                            new ImageIcon(image);
-                        } catch (IOException ex) {
-                            Logger.getLogger(CtrlAddSuspect.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
+                        Image img = new ImageIcon(iterator.next()).getImage();
+                        guiAddSuspect.imageLabel.setIcon(new ImageIcon(img));
+                        JOptionPane.showMessageDialog(null, "Imagenes", "Imagen", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img));
                     }
                     break;
                 case "previous":
@@ -242,7 +233,7 @@ public class CtrlAddSuspect implements ActionListener {
             suspects = consults.getSuspects();
             addSuspectsCompanion();
         } else {
-            JOptionPane.showMessageDialog(null, "Falta algún campo por completar");
+            JOptionPane.showMessageDialog(null, "Algún campo está incompleto");
         }
 
     }
@@ -262,6 +253,7 @@ public class CtrlAddSuspect implements ActionListener {
         guiAddSuspect.companionsList.removeAll();
         listCompanionsAddModel.removeAllElements();
         listCompanionsModel.removeAllElements();
+        photos = null;
     }
 
     private void addSuspectsCompanion() {

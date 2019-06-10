@@ -32,8 +32,6 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         viewSuspect_jScrollPane = new javax.swing.JScrollPane();
         viewSuspectPanel = new javax.swing.JPanel();
         nameSuspectLabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        licensePlatesList = new javax.swing.JList<>();
         matriculasLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         emailsList = new javax.swing.JList<>();
@@ -50,14 +48,22 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         jScrollPane7 = new javax.swing.JScrollPane();
         factsList = new javax.swing.JList<>();
         factsLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JLabel();
         previousImageButton = new javax.swing.JButton();
         nextImageButton = new javax.swing.JButton();
-        textField1 = new java.awt.TextField();
-        rSButtonMetro1 = new rsbuttom.RSButtonMetro();
+        licensePlatesList = new java.awt.List();
+        searchTextField = new java.awt.TextField();
+        searchButton = new rsbuttom.RSButtonMetro();
+        loadButton = new rsbuttom.RSButtonMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        tableSuspects.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tableSuspects = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tableSuspects.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -75,10 +81,6 @@ public class GUIviewSuspect extends javax.swing.JPanel {
 
         nameSuspectLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         nameSuspectLabel.setText("Información del Sospechoso");
-
-        jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jScrollPane2.setViewportView(licensePlatesList);
 
         matriculasLabel.setText("MATRÍCULAS");
 
@@ -102,7 +104,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
 
         factsLabel.setText("HECHOS");
 
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        imageLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         previousImageButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/previous.png"))); // NOI18N
 
@@ -124,18 +126,17 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
+                                .addGap(36, 36, 36)
                                 .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
                                         .addComponent(matriculasLabel)
                                         .addGap(132, 132, 132)
                                         .addComponent(phoneNumbersLabel)
                                         .addGap(197, 197, 197)
                                         .addComponent(emailsLabel))
                                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(74, 74, 74)
+                                        .addComponent(licensePlatesList, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(83, 83, 83)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -146,7 +147,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                                 .addComponent(previousImageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(nextImageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,17 +177,17 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                             .addComponent(phoneNumbersLabel)
                             .addComponent(emailsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane3)
+                            .addComponent(licensePlatesList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(20, 20, 20))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nextImageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(previousImageButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)))
                 .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
@@ -206,8 +207,12 @@ public class GUIviewSuspect extends javax.swing.JPanel {
 
         viewSuspect_jScrollPane.setViewportView(viewSuspectPanel);
 
-        rSButtonMetro1.setBackground(new java.awt.Color(255, 255, 255));
-        rSButtonMetro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/search.png"))); // NOI18N
+        searchButton.setBackground(new java.awt.Color(255, 255, 255));
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/search.png"))); // NOI18N
+
+        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/load.png"))); // NOI18N
+        loadButton.setText("CARGAR");
+        loadButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -218,13 +223,15 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,44 +239,49 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(viewSuspect_jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel companionsLabel;
+    public javax.swing.JLabel companionsLabel;
     private javax.swing.JList<String> companionsList;
     private javax.swing.JLabel emailsLabel;
-    private javax.swing.JList<String> emailsList;
+    public javax.swing.JList<String> emailsList;
     private javax.swing.JLabel factsLabel;
-    private javax.swing.JList<String> factsList;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JList<String> factsList;
+    public javax.swing.JLabel imageLabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JList<String> licensePlatesList;
+    public java.awt.List licensePlatesList;
+    public rsbuttom.RSButtonMetro loadButton;
     private javax.swing.JLabel matriculasLabel;
-    private javax.swing.JLabel nameSuspectLabel;
-    private javax.swing.JButton nextImageButton;
+    public javax.swing.JLabel nameSuspectLabel;
+    public javax.swing.JButton nextImageButton;
     private javax.swing.JLabel phoneNumbersLabel;
-    private javax.swing.JList<String> phoneNumbersList1;
-    private javax.swing.JButton previousImageButton;
-    private rsbuttom.RSButtonMetro rSButtonMetro1;
+    public javax.swing.JList<String> phoneNumbersList1;
+    public javax.swing.JButton previousImageButton;
     private javax.swing.JLabel recordsLabel;
-    private javax.swing.JList<String> recordsList;
-    private javax.swing.JTable tableSuspects;
-    private java.awt.TextField textField1;
+    public javax.swing.JList<String> recordsList;
+    public rsbuttom.RSButtonMetro searchButton;
+    public java.awt.TextField searchTextField;
+    public javax.swing.JTable tableSuspects;
     private javax.swing.JPanel viewSuspectPanel;
     private javax.swing.JScrollPane viewSuspect_jScrollPane;
     // End of variables declaration//GEN-END:variables

@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -283,58 +285,63 @@ public class Consults extends Connect {
         }
     }
 
-    public Suspect getSuspectFromBBDD(int idToSearch) throws SQLException {
-        Suspect s = null;
-
-        String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
-                + "                    s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
-                + "m.matricula, r.residencia, t.telefono, \n"
-                + "e.email, f.foto FROM sospechosos AS s LEFT JOIN emails AS e \n"
-                + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t \n"
-                + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r \n"
-                + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
-                + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
-                + "ON f.idSospechoso=s.id\n"
-                + "where s.id = " + idToSearch;
-
-        Connection con = getConnect();
-        Statement conexion = con.createStatement();
-        ResultSet rs = conexion.executeQuery(SqlQuery);
-        //ITERAMOS UNA VEZ
-        HashSet<String> correos = new HashSet<>();
-        HashSet<String> matriculas = new HashSet<>();
-        HashSet<String> residencias = new HashSet<>();
-        HashSet<String> telefonos = new HashSet<>();
-        HashSet<byte[]> fotos = new HashSet<>();
-        while (rs.next()) {
-            correos.add(rs.getString("email"));
-            matriculas.add(rs.getString("matricula"));
-            residencias.add(rs.getString("residencia"));
-            telefonos.add(rs.getString("telefono"));
-            fotos.add((rs.getBytes("foto")));
-
-            if (rs.isLast()) {
-                Blob blob = rs.getBlob("foto");
-                byte[] blobAsBytes = null;
-                if (blob != null) {
-                    int blobLength = (int) blob.length();
-                    blobAsBytes = blob.getBytes(1, blobLength);
-                    //release the blob and free up memory. (since JDBC 4.0)
-                    blob.free();
+    public Suspect getSuspectFromBBDD(int idToSearch){
+        try {
+            Suspect s = null;
+            
+            String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
+                    + "                    s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
+                    + "m.matricula, r.residencia, t.telefono, \n"
+                    + "e.email, f.foto FROM sospechosos AS s LEFT JOIN emails AS e \n"
+                    + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t \n"
+                    + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r \n"
+                    + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
+                    + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
+                    + "ON f.idSospechoso=s.id\n"
+                    + "where s.id = " + idToSearch;
+            
+            Connection con = getConnect();
+            Statement conexion = con.createStatement();
+            ResultSet rs = conexion.executeQuery(SqlQuery);
+            //ITERAMOS UNA VEZ
+            HashSet<String> correos = new HashSet<>();
+            HashSet<String> matriculas = new HashSet<>();
+            HashSet<String> residencias = new HashSet<>();
+            HashSet<String> telefonos = new HashSet<>();
+            HashSet<byte[]> fotos = new HashSet<>();
+            while (rs.next()) {
+                correos.add(rs.getString("email"));
+                matriculas.add(rs.getString("matricula"));
+                residencias.add(rs.getString("residencia"));
+                telefonos.add(rs.getString("telefono"));
+                fotos.add((rs.getBytes("foto")));
+                
+                if (rs.isLast()) {
+                    Blob blob = rs.getBlob("foto");
+                    byte[] blobAsBytes = null;
+                    if (blob != null) {
+                        int blobLength = (int) blob.length();
+                        blobAsBytes = blob.getBytes(1, blobLength);
+                        //release the blob and free up memory. (since JDBC 4.0)
+                        blob.free();
+                    }
+                    s = new Suspect(rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
+                            new ArrayList<>(matriculas), new ArrayList<>(residencias),
+                            new ArrayList<>(telefonos),
+                            new ArrayList<>(correos),
+                            null,
+                            rs.getString("antecedentes"), rs.getString("hechos"),
+                            new ArrayList<>(fotos));
                 }
-                s = new Suspect(rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
-                        new ArrayList<>(matriculas), new ArrayList<>(residencias),
-                        new ArrayList<>(telefonos),
-                        new ArrayList<>(correos),
-                        null,
-                        rs.getString("antecedentes"), rs.getString("hechos"),
-                        new ArrayList<>(fotos));
             }
+            super.disconnect();
+            return s;
+        } catch (SQLException ex) {
+            Logger.getLogger(Consults.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        super.disconnect();
-        return s;
     }
 
 }
