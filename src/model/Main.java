@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) throws SQLException{
-        /*CtrlGUIHome ctrlGUI = new CtrlGUIHome();
+        CtrlGUIHome ctrlGUI = new CtrlGUIHome();
         CtrlAddSuspect ctrlAddSuspect = new CtrlAddSuspect();
         CtrlHomePanel ctrlHome = new CtrlHomePanel();
         CtrlViewSuspect ctrlViewSuspect = new CtrlViewSuspect();
@@ -26,11 +26,11 @@ public class Main {
 
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
-        Consults consults = Consults.getConsults();
-        System.out.println(consults.searchSuspect("raul").size());
-                
+        //Consults consults = Consults.getConsults();
+
+        
         
         
         

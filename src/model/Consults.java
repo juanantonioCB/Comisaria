@@ -301,8 +301,8 @@ public class Consults extends Connect {
                     + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m\n"
                     + "ON m.idSospechoso=s.id LEFT JOIN acompañantes as a\n"
                     + "ON a.id1=s.id\n"
-                    + "where concat(UPPER(nombre),' ',UPPER(apellido1), ' ', UPPER(apellido2)) like UPPER('%"+search+"%') OR\n"
-                    + "dni like '"+search+"'";
+                    + "where concat(UPPER(nombre),' ',UPPER(apellido1), ' ', UPPER(apellido2)) like UPPER('%" + search + "%') OR\n"
+                    + "dni like '" + search + "'";
             Connection con = getConnect();
             Statement conexion = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -377,20 +377,42 @@ public class Consults extends Connect {
         }
     }
 
+    public ArrayList<Suspect> getCompanionsOfSuspect(int id) {
+        ArrayList<Suspect> companions = new ArrayList<>();
+        try {
+            String sqlQuery = "SELECT id2 from acompañantes where id1=" + id;
+            Connection con = getConnect();
+            Statement conexion = con.createStatement();
+            ResultSet rs = conexion.executeQuery(sqlQuery);
+            while (rs.next()) {
+                companions.add(getSuspectFromBBDD(rs.getInt("id2")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Consults.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        if (companions.size() != 0) {
+            return companions;
+        } else {
+            return null;
+        }
+    }
+
     public Suspect getSuspectFromBBDD(int idToSearch) {
         try {
             Suspect s = null;
 
             String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
-                    + "                    s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
+                    + "s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
                     + "m.matricula, r.residencia, t.telefono, \n"
-                    + "e.email, f.foto FROM sospechosos AS s LEFT JOIN emails AS e \n"
+                    + "e.email, f.foto, a.id2 FROM sospechosos AS s LEFT JOIN emails AS e \n"
                     + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t \n"
                     + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r \n"
                     + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
                     + "ON m.idSospechoso=s.id LEFT JOIN fotos as f\n"
-                    + "ON f.idSospechoso=s.id\n"
-                    + "where s.id = " + idToSearch;
+                    + "ON f.idSospechoso=s.id LEFT JOIN acompañantes as a\n"
+                    + "ON a.id1=s.id\n"
+                    + "where s.id =" + idToSearch;
 
             Connection con = getConnect();
             Statement conexion = con.createStatement();

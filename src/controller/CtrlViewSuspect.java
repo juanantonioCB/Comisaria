@@ -16,7 +16,7 @@ public class CtrlViewSuspect implements ActionListener {
 
     private static GUIviewSuspect guiViewSuspect;
     private Consults consults = null;
-    private ArrayList<Suspect> suspects = null;
+
 
     public CtrlViewSuspect() {
         guiViewSuspect = new GUIviewSuspect();
@@ -26,7 +26,7 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.loadButton.addActionListener(this);
         guiViewSuspect.reloadButton.addActionListener(this);
         consults = Consults.getConsults();
-        completeTable();
+        completeTable(consults.getSuspects());
     }
 
     @Override
@@ -37,41 +37,50 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (e.getSource() == guiViewSuspect.reloadButton) {
-            completeTable();
+            completeTable(consults.getSuspects());
+            
+        }
+        if(e.getSource()==guiViewSuspect.searchButton){
+            if(guiViewSuspect.searchTextField.getText().length()!=0){
+                listSearchSuspect(guiViewSuspect.searchTextField.getText());
+            }
         }
     }
 
-    private void completeTable() {
-        suspects = consults.getSuspects();
+    private void completeTable(ArrayList<Suspect> s) {
         DefaultTableModel model = new DefaultTableModel(new Object[][]{
             {null, null, null, null},},
                 new String[]{
                     "ID", "Nombre", "Apellidos", "DNI"
                 });
-        for (int i = 0; i < suspects.size() - 1; i++) {
+        for (int i = 0; i < s.size() - 1; i++) {
             model.addRow(new Object[][]{{null, null, null, null}});
 
         }
 
         guiViewSuspect.tableSuspects.setModel(model);
 
-        for (int x = 0; x < suspects.size(); x++) {
-            guiViewSuspect.tableSuspects.setValueAt(suspects.get(x).getId(), x, 0);
-            guiViewSuspect.tableSuspects.setValueAt(suspects.get(x).getName(), x, 1);
-            guiViewSuspect.tableSuspects.setValueAt(suspects.get(x).getSurname1() + " " + suspects.get(x).getSurname2(), x, 2);
-            guiViewSuspect.tableSuspects.setValueAt(suspects.get(x).getDNI(), x, 3);
+        for (int x = 0; x < s.size(); x++) {
+            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getId(), x, 0);
+            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getName(), x, 1);
+            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getSurname1() + " " + s.get(x).getSurname2(), x, 2);
+            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getDNI(), x, 3);
 
         }
     }
 
     private void loadSuspect(int id) {
         Suspect s = consults.getSuspectFromBBDD(id);
+        s.setCompanions(consults.getCompanionsOfSuspect(id));
+        s.setPhoto(consults.getPhotos(id));
         guiViewSuspect.phoneNumbersList.removeAll();
-        guiViewSuspect.emailsList.removeAll();
+        guiViewSuspect.companionsList.removeAll();
         guiViewSuspect.licensePlatesList.removeAll();
         guiViewSuspect.recordsTextArea.setText(null);
         guiViewSuspect.factsTextArea.setText(null);
         guiViewSuspect.nameSuspectLabel.setText(s.getName() + " " + s.getSurname1() + " " + s.getSurname2());
+        guiViewSuspect.companionsList.removeAll();
+        
         if (s.getPhoto() != null) {
             for (int i = 0; i < s.getPhoto().size(); i++) {
                 System.out.println(s.getPhoto().size());
@@ -89,7 +98,6 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (s.getEmails() != null) {
-
             for (int i = 0; i < s.getEmails().size(); i++) {
                 guiViewSuspect.emailsList.add((String) s.getEmails().get(i));
             }
@@ -101,13 +109,27 @@ public class CtrlViewSuspect implements ActionListener {
         if (s.getRecords() != null) {
             guiViewSuspect.recordsTextArea.setText(s.getRecords());
         }
+        if(s.getCompanions()!=null){
+            for(int i=0;i<s.getCompanions().size();i++){
+                System.out.println(s.getCompanions().get(i));
+                guiViewSuspect.companionsList.add(s.getCompanions().get(i).toString());
+            }
+        }
     }
 
+    private void listSearchSuspect(String search) {
+        ArrayList<Suspect> suspects = null;
+        suspects=consults.searchSuspect(search);
+        completeTable(suspects);
+    }
+    
     /**
      * @return the guiAddSuspect
      */
     public static GUIviewSuspect getGuiViewSuspect() {
         return guiViewSuspect;
     }
+
+    
 
 }
