@@ -166,9 +166,21 @@ public class Consults extends Connect {
     public void deleteSuspect(int id) {
         try {
             Connection con = getConnect();
-            String sql = "DELETE FROM Sospechosos where id = ?";
+            String sql = "delete from acompañantes where id1=?;\n"
+                    + "delete from emails where id=?;\n"
+                    + "delete from fotos where id=?;\n"
+                    + "delete from matriculas where id=?;\n"
+                    + "delete from residencias where id=?;\n"
+                    + "delete from telefonos where id=?;\n"
+                    + "delete from sospechosos where id=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setInt(2, id);
+            ps.setInt(3, id);
+            ps.setInt(4, id);
+            ps.setInt(5, id);
+            ps.setInt(6, id);
+            ps.setInt(7, id);
             ps.execute();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -215,6 +227,96 @@ public class Consults extends Connect {
                     + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m \n"
                     + "ON m.idSospechoso=s.id LEFT JOIN acompañantes as a\n"
                     + "ON a.id1=s.id";
+            Connection con = getConnect();
+            Statement conexion = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            ResultSet rs = conexion.executeQuery(SqlQuery);
+
+            //ITERAMOS UNA VEZ
+            HashSet<String> correos = new HashSet<>();
+            HashSet<String> matriculas = new HashSet<>();
+            HashSet<String> residencias = new HashSet<>();
+            HashSet<String> telefonos = new HashSet<>();
+            HashSet<byte[]> fotos = new HashSet<>();
+            HashSet<Suspect> companions = new HashSet<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                do {
+                    if (rs.getInt("id") != id) {
+                        rs.previous();
+
+                        Suspect nuevo = new Suspect(rs.getInt("id"),
+                                rs.getString("nombre"),
+                                rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
+                                new ArrayList<>(matriculas), new ArrayList<>(residencias),
+                                new ArrayList<>(telefonos),
+                                new ArrayList<>(correos),
+                                new ArrayList<Suspect>(companions),
+                                rs.getString("antecedentes"), rs.getString("hechos"),
+                                null
+                        );
+                        suspects.add(nuevo);
+                        rs.next();
+                        id = rs.getInt("id");
+                        correos = new HashSet<>();
+                        matriculas = new HashSet<>();
+                        telefonos = new HashSet<>();
+                        residencias = new HashSet<>();
+                        fotos = new HashSet<>();
+                        companions = new HashSet<>();
+                        rs.previous();
+                    } else {
+                        //hay que recoorrer las filas pertenecientes al mismo sujeto creando los arraylist correspondientes.
+
+                        correos.add(rs.getString("email"));
+                        matriculas.add(rs.getString("matricula"));
+                        telefonos.add(rs.getString("telefono"));
+                        residencias.add(rs.getString("residencia"));
+                        companions.add(getSuspectFromBBDD(rs.getInt("id2")));
+                    }
+                } while (rs.next());
+            }
+            //insert last one
+            rs.previous();
+
+            Suspect nuevo = new Suspect(rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("dni"),
+                    new ArrayList<>(matriculas), new ArrayList<>(residencias),
+                    new ArrayList<>(telefonos),
+                    new ArrayList<>(correos),
+                    new ArrayList<>(companions),
+                    rs.getString("antecedentes"), rs.getString("hechos"),
+                    null
+            );
+            suspects.add(nuevo);
+            super.disconnect();
+            if (suspects.size() == 0) {
+                return null;
+            } else {
+                return suspects;
+            }
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public ArrayList<Suspect> getRelatedSuspects(int idRelated) {
+        try {
+            ArrayList<Suspect> suspects = new ArrayList<>();
+            String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
+                    + "s.apellido2, s.dni, s.antecedentes, s.hechos,\n"
+                    + "m.matricula, r.residencia, t.telefono, \n"
+                    + "e.email, a.id2 FROM sospechosos AS s LEFT JOIN emails AS e\n"
+                    + "ON e.idSospechoso=s.id LEFT JOIN telefonos AS t\n"
+                    + "ON t.idSospechoso=s.id LEFT JOIN residencias AS r\n"
+                    + "ON r.idSospechoso=s.id LEFT JOIN matriculas AS m\n"
+                    + "ON m.idSospechoso=s.id LEFT JOIN acompañantes as a\n"
+                    + "ON a.id1=s.id\n"
+                    + "WHERE matricula in (select matricula from matriculas where idSospechoso=" + idRelated + ") OR\n"
+                    + "residencia in (select residencia from residencias where idSospechoso=" + idRelated + ") OR\n"
+                    + "telefono in (select telefono from telefonos where idSospechoso=" + idRelated + ") OR\n"
+                    + "email in (select email from emails where idSospechoso=" + idRelated + ")";
             Connection con = getConnect();
             Statement conexion = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -428,7 +530,7 @@ public class Consults extends Connect {
                 matriculas.add(rs.getString("matricula"));
                 residencias.add(rs.getString("residencia"));
                 telefonos.add(rs.getString("telefono"));
-                fotos.add((rs.getBytes("foto")));
+                //fotos.add((rs.getBytes("foto")));
 
                 if (rs.isLast()) {
                     Blob blob = rs.getBlob("foto");

@@ -18,7 +18,6 @@ public class CtrlViewSuspect implements ActionListener {
     private static GUIviewSuspect guiViewSuspect;
     private Consults consults = null;
 
-
     public CtrlViewSuspect() {
         guiViewSuspect = new GUIviewSuspect();
         guiViewSuspect.nextPhotoButton.addActionListener(this);
@@ -26,6 +25,15 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.searchButton.addActionListener(this);
         guiViewSuspect.loadButton.addActionListener(this);
         guiViewSuspect.reloadButton.addActionListener(this);
+        guiViewSuspect.deleteButton.addActionListener(this);
+        guiViewSuspect.searchTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (guiViewSuspect.searchTextField.getText().length() != 0) {
+                    listSearchSuspect(guiViewSuspect.searchTextField.getText());
+                }
+            }
+        });
         consults = Consults.getConsults();
         completeTable(consults.getSuspects());
     }
@@ -39,13 +47,23 @@ public class CtrlViewSuspect implements ActionListener {
         }
         if (e.getSource() == guiViewSuspect.reloadButton) {
             completeTable(consults.getSuspects());
-            
+
         }
-        if(e.getSource()==guiViewSuspect.searchButton){
-            if(guiViewSuspect.searchTextField.getText().length()!=0){
+        if (e.getSource() == guiViewSuspect.searchButton) {
+            if (guiViewSuspect.searchTextField.getText().length() != 0) {
                 listSearchSuspect(guiViewSuspect.searchTextField.getText());
             }
         }
+        if (e.getSource() == guiViewSuspect.deleteButton) {
+            if (guiViewSuspect.tableSuspects.getSelectedRow() != -1) {
+                deleteSuspect((int) guiViewSuspect.tableSuspects.getValueAt(guiViewSuspect.tableSuspects.getSelectedRow(), 0));
+            }
+        }
+    }
+
+    private void deleteSuspect(int id) {
+        consults.deleteSuspect(id);
+        completeTable(consults.getSuspects());
     }
 
     private void completeTable(ArrayList<Suspect> s) {
@@ -54,20 +72,21 @@ public class CtrlViewSuspect implements ActionListener {
                 new String[]{
                     "ID", "Nombre", "Apellidos", "DNI"
                 });
-        for (int i = 0; i < s.size() - 1; i++) {
-            model.addRow(new Object[][]{{null, null, null, null}});
-
-        }
-
         guiViewSuspect.tableSuspects.setModel(model);
+        if (s != null) {
+            for (int i = 0; i < s.size() - 1; i++) {
+                model.addRow(new Object[][]{{null, null, null, null}});
+            }
 
-        for (int x = 0; x < s.size(); x++) {
-            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getId(), x, 0);
-            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getName(), x, 1);
-            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getSurname1() + " " + s.get(x).getSurname2(), x, 2);
-            guiViewSuspect.tableSuspects.setValueAt(s.get(x).getDNI(), x, 3);
+            for (int x = 0; x < s.size(); x++) {
+                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getId(), x, 0);
+                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getName(), x, 1);
+                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getSurname1() + " " + s.get(x).getSurname2(), x, 2);
+                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getDNI(), x, 3);
 
+            }
         }
+
     }
 
     private void loadSuspect(int id) {
@@ -82,8 +101,7 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.nameSuspectLabel.setText(s.getName() + " " + s.getSurname1() + " " + s.getSurname2());
         guiViewSuspect.companionsList.removeAll();
         guiViewSuspect.emailsList.removeAll();
-        
-        
+
         if (s.getPhoto() != null) {
             for (int i = 0; i < s.getPhoto().size(); i++) {
                 guiViewSuspect.imageLabel.setIcon(new ImageIcon(s.getPhoto().get(0)));
@@ -112,8 +130,8 @@ public class CtrlViewSuspect implements ActionListener {
         if (s.getRecords() != null) {
             guiViewSuspect.recordsTextArea.setText(s.getRecords());
         }
-        if(s.getCompanions()!=null){
-            for(int i=0;i<s.getCompanions().size();i++){
+        if (s.getCompanions() != null) {
+            for (int i = 0; i < s.getCompanions().size(); i++) {
                 System.out.println(s.getCompanions().get(i));
                 guiViewSuspect.companionsList.add(s.getCompanions().get(i).toString());
             }
@@ -122,17 +140,15 @@ public class CtrlViewSuspect implements ActionListener {
 
     private void listSearchSuspect(String search) {
         ArrayList<Suspect> suspects = null;
-        suspects=consults.searchSuspect(search);
+        suspects = consults.searchSuspect(search);
         completeTable(suspects);
     }
-    
+
     /**
      * @return the guiAddSuspect
      */
     public static GUIviewSuspect getGuiViewSuspect() {
         return guiViewSuspect;
     }
-
-    
 
 }
