@@ -83,7 +83,6 @@ public class CtrlViewSuspect implements ActionListener {
                 guiViewSuspect.tableSuspects.setValueAt(s.get(x).getName(), x, 1);
                 guiViewSuspect.tableSuspects.setValueAt(s.get(x).getSurname1() + " " + s.get(x).getSurname2(), x, 2);
                 guiViewSuspect.tableSuspects.setValueAt(s.get(x).getDNI(), x, 3);
-
             }
         }
 

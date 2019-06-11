@@ -3,6 +3,7 @@ package model;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,9 +23,11 @@ public abstract class Connect {
             Class.forName("org.h2.Driver");
             con = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException ex) {
-            System.err.println(ex);
+            System.err.print(ex);
         } catch (SQLException ex) {
-            System.err.println(ex);
+            JOptionPane.showMessageDialog(null, "No se ha podido establecer conexión con la base de datos");
+
+            System.exit(0);
         }
         return con;
     }
