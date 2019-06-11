@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import model.Consults;
 import model.Suspect;
@@ -80,10 +81,12 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.factsTextArea.setText(null);
         guiViewSuspect.nameSuspectLabel.setText(s.getName() + " " + s.getSurname1() + " " + s.getSurname2());
         guiViewSuspect.companionsList.removeAll();
+        guiViewSuspect.emailsList.removeAll();
+        
         
         if (s.getPhoto() != null) {
             for (int i = 0; i < s.getPhoto().size(); i++) {
-                System.out.println(s.getPhoto().size());
+                guiViewSuspect.imageLabel.setIcon(new ImageIcon(s.getPhoto().get(0)));
             }
         }
         if (s.getLicensePlates() != null) {
