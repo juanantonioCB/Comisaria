@@ -32,6 +32,7 @@ public class CtrlGUIHome implements ActionListener {
 
         if (CtrlHomePanel.getGuiHomePanel() == null
                 || CtrlAddSuspect.getGuiAddSuspect() == null
+                || CtrlViewSuspect.getGuiViewSuspect() == null
                 || CtrlViewSuspect.getGuiViewSuspect() == null) {
             throw new Exception("Algun controlador no ha sido instanciado");
 
@@ -77,6 +78,14 @@ public class CtrlGUIHome implements ActionListener {
 
         if (e.getSource() == this.gui.aboutButton) {
 
+        }
+        
+        if(e.getSource()==this.gui.suspectsRelatedButton){
+            CtrlRelatedSuspects.getGuiRelatedSuspects().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
+            this.gui.contentPanel.removeAll();
+            this.gui.contentPanel.add(CtrlRelatedSuspects.getGuiRelatedSuspects());
+            this.gui.contentPanel.revalidate();
+            this.gui.contentPanel.repaint();
         }
 
     }

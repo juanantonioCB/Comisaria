@@ -3,6 +3,7 @@ package model;
 import controller.CtrlAddSuspect;
 import controller.CtrlGUIHome;
 import controller.CtrlHomePanel;
+import controller.CtrlRelatedSuspects;
 import controller.CtrlViewSuspect;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,13 +17,15 @@ import view.GUILoad;
  */
 public class Main {
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException {
         GUILoad load = new GUILoad();
         load.setVisible(true);
         load.jProgressBar1.setValue(10);
-        
+
         CtrlGUIHome ctrlGUI = new CtrlGUIHome();
         load.jProgressBar1.setValue(30);
+        CtrlRelatedSuspects ctrlRelatedSuspects = new CtrlRelatedSuspects();
+        load.jProgressBar1.setValue(45);
         CtrlAddSuspect ctrlAddSuspect = new CtrlAddSuspect();
         load.jProgressBar1.setValue(60);
         CtrlHomePanel ctrlHome = new CtrlHomePanel();
@@ -37,14 +40,7 @@ public class Main {
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        //Consults consults = Consults.getConsults();
 
-        
-        
-        
-        
-        
-        
+        //Consults consults = Consults.getConsults();
     }
 }
