@@ -1,6 +1,7 @@
 package model;
 
 import controller.CtrlAddSuspect;
+import controller.CtrlGUIAbout;
 import controller.CtrlGUIHome;
 import controller.CtrlHomePanel;
 import controller.CtrlRelatedSuspects;
@@ -31,6 +32,7 @@ public class Main {
         CtrlHomePanel ctrlHome = new CtrlHomePanel();
         load.jProgressBar1.setValue(80);
         CtrlViewSuspect ctrlViewSuspect = new CtrlViewSuspect();
+        CtrlGUIAbout ctrlGUIAbout = new CtrlGUIAbout();
         load.jProgressBar1.setValue(100);
         load.setVisible(false);
 

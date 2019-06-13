@@ -33,7 +33,8 @@ public class CtrlGUIHome implements ActionListener {
         if (CtrlHomePanel.getGuiHomePanel() == null
                 || CtrlAddSuspect.getGuiAddSuspect() == null
                 || CtrlViewSuspect.getGuiViewSuspect() == null
-                || CtrlViewSuspect.getGuiViewSuspect() == null) {
+                || CtrlViewSuspect.getGuiViewSuspect() == null
+                || CtrlGUIAbout.getGuiAbout() == null) {
             throw new Exception("Algun controlador no ha sido instanciado");
 
         } else {
@@ -77,10 +78,14 @@ public class CtrlGUIHome implements ActionListener {
         }
 
         if (e.getSource() == this.gui.aboutButton) {
-
+            CtrlGUIAbout.getGuiAbout().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
+            this.gui.contentPanel.removeAll();
+            this.gui.contentPanel.add(CtrlGUIAbout.getGuiAbout());
+            this.gui.contentPanel.revalidate();
+            this.gui.contentPanel.repaint();
         }
-        
-        if(e.getSource()==this.gui.suspectsRelatedButton){
+
+        if (e.getSource() == this.gui.suspectsRelatedButton) {
             CtrlRelatedSuspects.getGuiRelatedSuspects().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
             this.gui.contentPanel.removeAll();
             this.gui.contentPanel.add(CtrlRelatedSuspects.getGuiRelatedSuspects());
