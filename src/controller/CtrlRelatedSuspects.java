@@ -15,7 +15,7 @@ import view.GUIRelatedSuspects;
  */
 public class CtrlRelatedSuspects implements ActionListener {
     
-    public static GUIRelatedSuspects relatedSuspects;
+    private static GUIRelatedSuspects relatedSuspects;
     private DefaultListModel listSuspectsRelatedModel = new DefaultListModel<>();
     private Consults consults = Consults.getConsults();
     

@@ -1,9 +1,13 @@
 package controller;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Consults;
 import model.Suspect;
@@ -23,7 +27,6 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.nextPhotoButton.addActionListener(this);
         guiViewSuspect.previousPhotoButton.addActionListener(this);
         guiViewSuspect.searchButton.addActionListener(this);
-        guiViewSuspect.loadButton.addActionListener(this);
         guiViewSuspect.reloadButton.addActionListener(this);
         guiViewSuspect.deleteButton.addActionListener(this);
         guiViewSuspect.searchTextField.addActionListener(new ActionListener() {
@@ -34,17 +37,26 @@ public class CtrlViewSuspect implements ActionListener {
                 }
             }
         });
+
+        guiViewSuspect.tableSuspects.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    // your valueChanged overridden method 
+                    loadSuspect((int) guiViewSuspect.tableSuspects.getValueAt(row, 0));
+                }
+            }
+        });
+
         consults = Consults.getConsults();
         completeTable(consults.getSuspects());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == guiViewSuspect.loadButton) {
-            if (guiViewSuspect.tableSuspects.getSelectedRow() != -1) {
-                loadSuspect((int) guiViewSuspect.tableSuspects.getValueAt(guiViewSuspect.tableSuspects.getSelectedRow(), 0));
-            }
-        }
+       
         if (e.getSource() == guiViewSuspect.reloadButton) {
             completeTable(consults.getSuspects());
 
@@ -67,22 +79,15 @@ public class CtrlViewSuspect implements ActionListener {
     }
 
     private void completeTable(ArrayList<Suspect> s) {
-        DefaultTableModel model = new DefaultTableModel(new Object[][]{
-            {null, null, null, null},},
-                new String[]{
+        DefaultTableModel model = new DefaultTableModel(
+                new Object[]{
                     "ID", "Nombre", "Apellidos", "DNI"
-                });
+                }, 0);
         guiViewSuspect.tableSuspects.setModel(model);
         if (s != null) {
             for (int i = 0; i < s.size() - 1; i++) {
-                model.addRow(new Object[][]{{null, null, null, null}});
-            }
-
-            for (int x = 0; x < s.size(); x++) {
-                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getId(), x, 0);
-                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getName(), x, 1);
-                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getSurname1() + " " + s.get(x).getSurname2(), x, 2);
-                guiViewSuspect.tableSuspects.setValueAt(s.get(x).getDNI(), x, 3);
+                model.addRow(new Object[]{s.get(i).getId(), s.get(i).getName(),
+                    s.get(i).getSurname1() + " " + s.get(i).getSurname2(), s.get(i).getDNI()});
             }
         }
 

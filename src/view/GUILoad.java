@@ -30,8 +30,8 @@ public class GUILoad extends javax.swing.JFrame {
 
         background = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel1 = new javax.swing.JLabel();
+        jProgressBar = new javax.swing.JProgressBar();
+        loadingLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -42,15 +42,15 @@ public class GUILoad extends javax.swing.JFrame {
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("Comisaria 0.1");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cargando...");
+        loadingLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        loadingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loadingLabel.setText("Cargando...");
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
@@ -58,7 +58,7 @@ public class GUILoad extends javax.swing.JFrame {
                         .addComponent(titleLabel))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(204, 204, 204)
-                        .addComponent(jLabel1)))
+                        .addComponent(loadingLabel)))
                 .addContainerGap(184, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
@@ -67,9 +67,9 @@ public class GUILoad extends javax.swing.JFrame {
                 .addGap(71, 71, 71)
                 .addComponent(titleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(loadingLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
 
@@ -124,8 +124,8 @@ public class GUILoad extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
-    private javax.swing.JLabel jLabel1;
-    public javax.swing.JProgressBar jProgressBar1;
+    public javax.swing.JProgressBar jProgressBar;
+    private javax.swing.JLabel loadingLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

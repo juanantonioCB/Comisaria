@@ -157,8 +157,9 @@ public class CtrlAddSuspect implements ActionListener {
                     break;
                 case "previous":
                     if (iterator.hasPrevious()) {
-                        iterator.previous();
-                        System.out.println(iterator);
+                        Image img = new ImageIcon(iterator.previous()).getImage();
+                        guiAddSuspect.imageLabel.setIcon(new ImageIcon(img));
+                        JOptionPane.showMessageDialog(null, "Imagenes", "Imagen", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img));
                     }
             }
         }
@@ -235,7 +236,6 @@ public class CtrlAddSuspect implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(null, "Algún campo está incompleto");
         }
-
     }
 
     private void clearForms() {

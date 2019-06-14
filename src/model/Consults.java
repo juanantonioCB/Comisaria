@@ -333,7 +333,7 @@ public class Consults extends Connect {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 do {
-                    if (rs.getInt("id") != id && rs.getInt("id")!=idRelated) {
+                    if (rs.getInt("id") != id) {
                         rs.previous();
 
                         Suspect nuevo = new Suspect(rs.getInt("id"),
