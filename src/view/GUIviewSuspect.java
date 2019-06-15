@@ -50,6 +50,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         previousPhotoButton = new rsbuttom.RSButtonMetro();
         nextPhotoButton = new rsbuttom.RSButtonMetro();
         emailsList = new java.awt.List();
+        currentPhoto = new javax.swing.JLabel();
         searchTextField = new java.awt.TextField();
         searchButton = new rsbuttom.RSButtonMetro();
         reloadButton = new rsbuttom.RSButtonMetro();
@@ -107,6 +108,8 @@ public class GUIviewSuspect extends javax.swing.JPanel {
 
         nextPhotoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/next.png"))); // NOI18N
 
+        currentPhoto.setText("-1");
+
         javax.swing.GroupLayout viewSuspectPanelLayout = new javax.swing.GroupLayout(viewSuspectPanel);
         viewSuspectPanel.setLayout(viewSuspectPanelLayout);
         viewSuspectPanelLayout.setHorizontalGroup(
@@ -144,6 +147,8 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                             .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                                 .addComponent(previousPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(currentPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(nextPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
@@ -173,8 +178,13 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                        .addComponent(nextPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addComponent(nextPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
+                                .addComponent(currentPhoto)
+                                .addGap(18, 18, 18)))
                         .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(previousPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,6 +277,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel companionsLabel;
     public java.awt.List companionsList;
+    public javax.swing.JLabel currentPhoto;
     public rsbuttom.RSButtonMetro deleteButton;
     private javax.swing.JLabel emailsLabel;
     public java.awt.List emailsList;

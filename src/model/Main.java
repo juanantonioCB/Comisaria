@@ -36,7 +36,6 @@ public class Main {
 
         try {
             ctrlGUI.start();
-
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

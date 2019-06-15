@@ -57,6 +57,7 @@ public class CtrlAddSuspect implements ActionListener {
         guiAddSuspect.companionsListAdd.setModel(listCompanionsAddModel);
         guiAddSuspect.companionsList.setModel(listCompanionsModel);
         guiAddSuspect.deleteResidenciesButton.addActionListener(this);
+        guiAddSuspect.currentPhoto.setVisible(false);
 
     }
 
