@@ -3,12 +3,9 @@ package controller;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ListIterator;
@@ -35,6 +32,7 @@ public class CtrlAddSuspect implements ActionListener {
     private static GUIAddSuspect guiAddSuspect;
     private Consults consults = Consults.getConsults();
     private ArrayList<byte[]> photos = null;
+    private ListIterator<byte[]> iterator = null;
     private ArrayList<Suspect> suspects = consults.getSuspects();
     private DefaultListModel listCompanionsAddModel = new DefaultListModel<>();
     private DefaultListModel listCompanionsModel = new DefaultListModel<>();
@@ -54,6 +52,7 @@ public class CtrlAddSuspect implements ActionListener {
         guiAddSuspect.previousPhotoButton.addActionListener(this);
         guiAddSuspect.saveButton.addActionListener(this);
         guiAddSuspect.addPhotoButton.addActionListener(this);
+        guiAddSuspect.removePhotoButton.addActionListener(this);
         addSuspectsCompanion();
         guiAddSuspect.companionsListAdd.setModel(listCompanionsAddModel);
         guiAddSuspect.companionsList.setModel(listCompanionsModel);
@@ -118,6 +117,10 @@ public class CtrlAddSuspect implements ActionListener {
             showImage("previous");
         }
 
+        if (e.getSource() == guiAddSuspect.removePhotoButton) {
+            showImage("remove");
+        }
+
         if (e.getSource() == guiAddSuspect.addCompanionButton) {
             if (guiAddSuspect.companionsListAdd.getSelectedIndex() != -1) {
                 listCompanionsModel.addElement(listCompanionsAddModel.getElementAt(guiAddSuspect.companionsListAdd.getSelectedIndex()));
@@ -146,21 +149,31 @@ public class CtrlAddSuspect implements ActionListener {
 
     private void showImage(String option) {
         if (photos != null) {
-            ListIterator<byte[]> iterator = photos.listIterator();
+            int currentPhoto = Integer.parseInt(guiAddSuspect.currentPhoto.getText());
             switch (option) {
                 case "next":
-                    if (iterator.hasNext()) {
-                        Image img = new ImageIcon(iterator.next()).getImage();
+                    if (photos.size() > currentPhoto + 1) {
+                        byte[] foto = photos.get(currentPhoto + 1);
+                        Image img = new ImageIcon(foto).getImage().getScaledInstance(guiAddSuspect.imageLabel.getWidth(), guiAddSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
                         guiAddSuspect.imageLabel.setIcon(new ImageIcon(img));
-                        JOptionPane.showMessageDialog(null, "Imagenes", "Imagen", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img));
+                        guiAddSuspect.currentPhoto.setText(String.valueOf(currentPhoto + 1));
                     }
                     break;
                 case "previous":
-                    if (iterator.hasPrevious()) {
-                        Image img = new ImageIcon(iterator.previous()).getImage();
+                    if ((currentPhoto - 1) > -1) {
+                        byte[] foto = photos.get(currentPhoto - 1);
+                        Image img = new ImageIcon(foto).getImage().getScaledInstance(guiAddSuspect.imageLabel.getWidth(), guiAddSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
                         guiAddSuspect.imageLabel.setIcon(new ImageIcon(img));
-                        JOptionPane.showMessageDialog(null, "Imagenes", "Imagen", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img));
+                        guiAddSuspect.currentPhoto.setText(String.valueOf(currentPhoto - 1));
                     }
+                    break;
+                case "remove":
+                    if (currentPhoto > -1) {
+                        photos.remove(currentPhoto);
+                        guiAddSuspect.currentPhoto.setText("-1");
+                        guiAddSuspect.imageLabel.setIcon(null);
+                    }
+                    break;
             }
         }
 
@@ -169,30 +182,26 @@ public class CtrlAddSuspect implements ActionListener {
     private void loadImage() {
         if (photos == null) {
             photos = new ArrayList<>();
+            iterator = photos.listIterator();
         }
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif"));
         fileChooser.setDialogTitle("Busca una foto");
         if (fileChooser.showOpenDialog(guiAddSuspect) == JFileChooser.APPROVE_OPTION) {
             File image = new File(fileChooser.getSelectedFile().getAbsolutePath());
-            FileInputStream fis = null;
+            byte[] fileContent;
             try {
-                fis = new FileInputStream(image);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CtrlAddSuspect.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            try {
-                for (int i; (i = fis.read()) != -1;) {
-                    bos.write(buf, 0, i);
-                }
+                fileContent = Files.readAllBytes(image.toPath());
+                photos.add(fileContent);
+                Image img = new ImageIcon(fileContent).getImage().getScaledInstance(guiAddSuspect.imageLabel.getWidth(), guiAddSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
+                guiAddSuspect.imageLabel.setIcon(new ImageIcon(img));
+                guiAddSuspect.currentPhoto.setText(String.valueOf(photos.size() - 1));
+
             } catch (IOException ex) {
                 Logger.getLogger(CtrlAddSuspect.class.getName()).log(Level.SEVERE, null, ex);
             }
-            byte[] imageBytes = bos.toByteArray();
-            photos.add(imageBytes);
         }
+
     }
 
     private void saveSuspect() {

@@ -21,7 +21,6 @@ public class Main {
         GUILoad load = new GUILoad();
         load.setVisible(true);
         load.jProgressBar.setValue(10);
-
         CtrlGUIHome ctrlGUI = new CtrlGUIHome();
         load.jProgressBar.setValue(30);
         CtrlRelatedSuspects ctrlRelatedSuspects = new CtrlRelatedSuspects();

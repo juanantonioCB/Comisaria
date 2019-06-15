@@ -49,7 +49,6 @@ public class CtrlGUIHome implements ActionListener {
             this.gui.contentPanel.revalidate();
             this.gui.contentPanel.repaint();
         }
-
     }
 
     @Override

@@ -198,10 +198,10 @@ public class Consults extends Connect {
             ResultSet rs = conexion.executeQuery(sqlQuery);
             while (rs.next()) {
                 byte[] blobAsBytes = null;
-                Blob blob = rs.getBlob("foto");
-                int blobLength = (int) blob.length();
+                blobAsBytes = rs.getBytes("foto");
+                /*int blobLength = (int) blob.length();
                 blobAsBytes = blob.getBytes(1, blobLength);
-                blob.free();
+                blob.free();*/
                 images.add(blobAsBytes);
             }
             if (images.size() == 0) {

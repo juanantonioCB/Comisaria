@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,7 +57,7 @@ public class CtrlViewSuspect implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       
+
         if (e.getSource() == guiViewSuspect.reloadButton) {
             completeTable(consults.getSuspects());
 
@@ -85,7 +86,7 @@ public class CtrlViewSuspect implements ActionListener {
                 }, 0);
         guiViewSuspect.tableSuspects.setModel(model);
         if (s != null) {
-            for (int i = 0; i < s.size() - 1; i++) {
+            for (int i = 0; i < s.size(); i++) {
                 model.addRow(new Object[]{s.get(i).getId(), s.get(i).getName(),
                     s.get(i).getSurname1() + " " + s.get(i).getSurname2(), s.get(i).getDNI()});
             }
@@ -107,9 +108,8 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.emailsList.removeAll();
 
         if (s.getPhoto() != null) {
-            for (int i = 0; i < s.getPhoto().size(); i++) {
-                guiViewSuspect.imageLabel.setIcon(new ImageIcon(s.getPhoto().get(0)));
-            }
+            Image img = new ImageIcon(s.getPhoto().get(0)).getImage().getScaledInstance(guiViewSuspect.imageLabel.getWidth(), guiViewSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
+            guiViewSuspect.imageLabel.setIcon(new ImageIcon(img));
         }
         if (s.getLicensePlates() != null) {
             for (int i = 0; i < s.getLicensePlates().size(); i++) {
