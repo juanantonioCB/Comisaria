@@ -19,11 +19,11 @@ import view.GUIviewSuspect;
  * @author Juan Antonio
  */
 public class CtrlViewSuspect implements ActionListener {
-    
+
     private static GUIviewSuspect guiViewSuspect;
     private Consults consults = null;
     private Suspect suspect = null;
-    
+
     public CtrlViewSuspect() {
         guiViewSuspect = new GUIviewSuspect();
         guiViewSuspect.nextPhotoButton.addActionListener(this);
@@ -40,6 +40,7 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.deleteEmailButton.addActionListener(this);
         guiViewSuspect.deleteLicensePlatesButton.addActionListener(this);
         guiViewSuspect.deletePhoneNumberButton.addActionListener(this);
+        guiViewSuspect.saveChangesButton.addActionListener(this);
         guiViewSuspect.searchTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,7 +49,7 @@ public class CtrlViewSuspect implements ActionListener {
                 }
             }
         });
-        
+
         guiViewSuspect.tableSuspects.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent mouseEvent) {
                 JTable table = (JTable) mouseEvent.getSource();
@@ -64,13 +65,13 @@ public class CtrlViewSuspect implements ActionListener {
         completeTable(consults.getSuspects());
         guiViewSuspect.currentPhoto.setVisible(false);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if (e.getSource() == guiViewSuspect.reloadButton) {
             completeTable(consults.getSuspects());
-            
+
         }
         if (e.getSource() == guiViewSuspect.searchButton) {
             if (guiViewSuspect.searchTextField.getText().length() != 0) {
@@ -88,13 +89,49 @@ public class CtrlViewSuspect implements ActionListener {
         if (e.getSource() == guiViewSuspect.previousPhotoButton) {
             showImage("previous");
         }
+        if (e.getSource() == guiViewSuspect.addLicensePlatesButton) {
+            if (guiViewSuspect.licensePlatesTextField.getText().length() != 0) {
+                guiViewSuspect.licensePlatesList.add(guiViewSuspect.licensePlatesTextField.getText());
+                guiViewSuspect.licensePlatesTextField.setText(null);
+            }
+        }
+        if (e.getSource() == guiViewSuspect.addEmailButton) {
+            if (guiViewSuspect.emailsTextField.getText().length() != 0) {
+                guiViewSuspect.emailsList.add(guiViewSuspect.emailsTextField.getText());
+                guiViewSuspect.emailsTextField.setText(null);
+            }
+        }
+        if (e.getSource() == guiViewSuspect.addPhoneNumberButton) {
+            if (guiViewSuspect.phoneNumbersTextField.getText().length() != 0) {
+                guiViewSuspect.phoneNumbersList.add(guiViewSuspect.phoneNumbersTextField.getText());
+                guiViewSuspect.phoneNumbersTextField.setText(null);
+            }
+        }
+        if (e.getSource() == guiViewSuspect.deleteLicensePlatesButton) {
+            if (guiViewSuspect.licensePlatesList.getSelectedIndex() != -1) {
+                guiViewSuspect.licensePlatesList.remove(guiViewSuspect.licensePlatesList.getSelectedIndex());
+            }
+        }
+        if (e.getSource() == guiViewSuspect.deletePhoneNumberButton) {
+            if (guiViewSuspect.phoneNumbersList.getSelectedIndex() != -1) {
+                guiViewSuspect.phoneNumbersList.remove(guiViewSuspect.phoneNumbersList.getSelectedIndex());
+            }
+        }
+        if (e.getSource() == guiViewSuspect.deleteEmailButton) {
+            if (guiViewSuspect.emailsList.getSelectedIndex() != -1) {
+                guiViewSuspect.emailsList.remove(guiViewSuspect.emailsList.getSelectedIndex());
+            }
+        }
+        if (e.getSource() == guiViewSuspect.saveChangesButton) {
+            saveChanges();
+        }
     }
-    
+
     private void deleteSuspect(int id) {
         consults.deleteSuspect(id);
         completeTable(consults.getSuspects());
     }
-    
+
     private void completeTable(ArrayList<Suspect> s) {
         DefaultTableModel model = new DefaultTableModel(
                 new Object[]{
@@ -107,11 +144,12 @@ public class CtrlViewSuspect implements ActionListener {
                     s.get(i).getSurname1() + " " + s.get(i).getSurname2(), s.get(i).getDNI()});
             }
         }
-        
+
     }
-    
+
     private void loadSuspect(int id) {
         suspect = consults.getSuspectFromBBDD(id);
+        guiViewSuspect.currentSuspectLabel.setText(String.valueOf(id));
         suspect.setCompanions(consults.getCompanionsOfSuspect(id));
         suspect.setPhoto(consults.getPhotos(id));
         guiViewSuspect.phoneNumbersList.removeAll();
@@ -123,7 +161,7 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.companionsList.removeAll();
         guiViewSuspect.emailsList.removeAll();
         guiViewSuspect.imageLabel.setIcon(null);
-        
+
         if (suspect.getPhoto() != null) {
             Image img = new ImageIcon(suspect.getPhoto().get(0)).getImage().getScaledInstance(guiViewSuspect.imageLabel.getWidth(), guiViewSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
             guiViewSuspect.imageLabel.setIcon(new ImageIcon(img));
@@ -135,7 +173,7 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (suspect.getPhoneNumbers() != null) {
-            
+
             for (int i = 0; i < suspect.getPhoneNumbers().size(); i++) {
                 guiViewSuspect.phoneNumbersList.add((String) suspect.getPhoneNumbers().get(i));
             }
@@ -146,7 +184,7 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (suspect.getFacts() != null) {
-            
+
             guiViewSuspect.factsTextArea.setText(suspect.getFacts());
         }
         if (suspect.getRecords() != null) {
@@ -159,7 +197,7 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
     }
-    
+
     private void showImage(String option) {
         if (suspect.getPhoto() != null) {
             int currentPhoto = Integer.parseInt(guiViewSuspect.currentPhoto.getText());
@@ -189,9 +227,8 @@ public class CtrlViewSuspect implements ActionListener {
                     break;
             }
         }
-        
     }
-    
+
     private void listSearchSuspect(String search) {
         ArrayList<Suspect> suspects = null;
         suspects = consults.searchSuspect(search);
@@ -204,5 +241,9 @@ public class CtrlViewSuspect implements ActionListener {
     public static GUIviewSuspect getGuiViewSuspect() {
         return guiViewSuspect;
     }
-    
+
+    private void saveChanges() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

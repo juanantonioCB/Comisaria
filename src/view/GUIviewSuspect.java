@@ -64,6 +64,9 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         deleteCompanionButton = new rsbuttom.RSButtonMetro();
         companionsAllList = new java.awt.List();
         saveChangesButton = new rsbuttom.RSButtonMetro();
+        currentSuspectLabel = new javax.swing.JLabel();
+        addPhotoButton = new rsbuttom.RSButtonMetro();
+        deletePhotoButton = new rsbuttom.RSButtonMetro();
         searchTextField = new java.awt.TextField();
         searchButton = new rsbuttom.RSButtonMetro();
         reloadButton = new rsbuttom.RSButtonMetro();
@@ -142,77 +145,89 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         saveChangesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/save.png"))); // NOI18N
         saveChangesButton.setText("GUARDAR CAMBIOS");
 
+        currentSuspectLabel.setText("-1");
+
+        addPhotoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
+
+        deletePhotoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/trash.png"))); // NOI18N
+
         javax.swing.GroupLayout viewSuspectPanelLayout = new javax.swing.GroupLayout(viewSuspectPanel);
         viewSuspectPanel.setLayout(viewSuspectPanelLayout);
         viewSuspectPanelLayout.setHorizontalGroup(
             viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                 .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(nameSuspectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                    .addComponent(previousPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(56, 56, 56)
-                                    .addComponent(currentPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nextPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                    .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                            .addComponent(emailsList, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                                    .addComponent(addEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(deleteEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(emailsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(24, 24, 24)
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                            .addComponent(factsLabel)
-                                            .addGap(112, 112, 112)))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
-                                            .addComponent(recordsLabel)
-                                            .addGap(114, 114, 114))))
-                                .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                    .addGap(76, 76, 76)
-                                    .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(emailsLabel)
-                                        .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                            .addComponent(matriculasLabel)
-                                            .addGap(293, 293, 293)
-                                            .addComponent(phoneNumbersLabel))))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(licensePlatesList, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                    .addComponent(addLicensePlatesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(deleteLicensePlatesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(licensePlatesTextField))
-                            .addGap(86, 86, 86)
-                            .addComponent(phoneNumbersList, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                    .addComponent(addPhoneNumberButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(deletePhoneNumberButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(phoneNumbersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(320, 320, 320)))
+                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameSuspectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(currentSuspectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                        .addComponent(previousPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(62, 62, 62)
+                                        .addComponent(currentPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(nextPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                                .addComponent(emailsList, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                                        .addComponent(addEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(deleteEmailButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(emailsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(24, 24, 24)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                                .addComponent(factsLabel)
+                                                .addGap(112, 112, 112)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
+                                                .addComponent(recordsLabel)
+                                                .addGap(114, 114, 114))))
+                                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                        .addGap(76, 76, 76)
+                                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(emailsLabel)
+                                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                                .addComponent(matriculasLabel)
+                                                .addGap(293, 293, 293)
+                                                .addComponent(phoneNumbersLabel))))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(licensePlatesList, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                        .addComponent(addLicensePlatesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(deleteLicensePlatesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(licensePlatesTextField))
+                                .addGap(86, 86, 86)
+                                .addComponent(phoneNumbersList, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                        .addComponent(addPhoneNumberButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(deletePhoneNumberButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(phoneNumbersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(320, 320, 320)))
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                            .addComponent(deletePhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(companionsList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +243,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                         .addGap(419, 419, 419)
                         .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap())
         );
         viewSuspectPanelLayout.setVerticalGroup(
             viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,14 +253,25 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nextPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(currentPhoto, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(currentPhoto)))
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(addPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(deletePhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(previousPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameSuspectLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(3, 3, 3)
+                        .addComponent(currentSuspectLabel)
+                        .addGap(1, 1, 1)
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(viewSuspectPanelLayout.createSequentialGroup()
                                 .addComponent(phoneNumbersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,18 +396,21 @@ public class GUIviewSuspect extends javax.swing.JPanel {
     public rsbuttom.RSButtonMetro addEmailButton;
     public rsbuttom.RSButtonMetro addLicensePlatesButton;
     public rsbuttom.RSButtonMetro addPhoneNumberButton;
+    public rsbuttom.RSButtonMetro addPhotoButton;
     public java.awt.List companionsAllList;
     public javax.swing.JLabel companionsLabel;
     public java.awt.List companionsList;
     public javax.swing.JLabel currentPhoto;
+    public javax.swing.JLabel currentSuspectLabel;
     public rsbuttom.RSButtonMetro deleteButton;
     public rsbuttom.RSButtonMetro deleteCompanionButton;
     public rsbuttom.RSButtonMetro deleteEmailButton;
     public rsbuttom.RSButtonMetro deleteLicensePlatesButton;
     public rsbuttom.RSButtonMetro deletePhoneNumberButton;
+    public rsbuttom.RSButtonMetro deletePhotoButton;
     private javax.swing.JLabel emailsLabel;
     public java.awt.List emailsList;
-    private javax.swing.JTextField emailsTextField;
+    public javax.swing.JTextField emailsTextField;
     private javax.swing.JLabel factsLabel;
     public javax.swing.JTextArea factsTextArea;
     public javax.swing.JLabel imageLabel;

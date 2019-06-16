@@ -20,7 +20,7 @@ public class Consults extends Connect {
     private static Consults consults = null;
 
     private Consults() {
-        
+
     }
 
     public static Consults getConsults() {
@@ -30,7 +30,7 @@ public class Consults extends Connect {
         return consults;
     }
 
-    public void insertSuspect(Suspect s) {
+    public void insertSuspect(Suspect s, Integer id) {
         Connection con = getConnect();
         String sql = "INSERT INTO Sospechosos (nombre, apellido1, apellido2, dni"
                 + ", antecedentes, hechos) values (?,?,?,?,?,?)";

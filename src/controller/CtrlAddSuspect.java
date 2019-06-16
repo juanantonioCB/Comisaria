@@ -237,7 +237,7 @@ public class CtrlAddSuspect implements ActionListener {
                     records,
                     facts,
                     photos);
-            consults.insertSuspect(suspect);
+            consults.insertSuspect(suspect,0);
 
             JOptionPane.showMessageDialog(null, "Sospechoso guardado correctamente");
             clearForms();
