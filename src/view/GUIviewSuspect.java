@@ -63,6 +63,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         addCompanionButton = new rsbuttom.RSButtonMetro();
         deleteCompanionButton = new rsbuttom.RSButtonMetro();
         companionsAllList = new java.awt.List();
+        saveChangesButton = new rsbuttom.RSButtonMetro();
         searchTextField = new java.awt.TextField();
         searchButton = new rsbuttom.RSButtonMetro();
         reloadButton = new rsbuttom.RSButtonMetro();
@@ -137,6 +138,9 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         addCompanionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
 
         deleteCompanionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/delete.png"))); // NOI18N
+
+        saveChangesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/save.png"))); // NOI18N
+        saveChangesButton.setText("GUARDAR CAMBIOS");
 
         javax.swing.GroupLayout viewSuspectPanelLayout = new javax.swing.GroupLayout(viewSuspectPanel);
         viewSuspectPanel.setLayout(viewSuspectPanelLayout);
@@ -220,7 +224,10 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(companionsAllList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(companionsAllList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                        .addGap(419, 419, 419)
+                        .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         viewSuspectPanelLayout.setVerticalGroup(
@@ -286,7 +293,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                         .addComponent(recordsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(companionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +304,9 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                             .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(companionsList, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(companionsAllList, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         viewSuspect_jScrollPane.setViewportView(viewSuspectPanel);
@@ -391,6 +400,7 @@ public class GUIviewSuspect extends javax.swing.JPanel {
     private javax.swing.JLabel recordsLabel;
     public javax.swing.JTextArea recordsTextArea;
     public rsbuttom.RSButtonMetro reloadButton;
+    public rsbuttom.RSButtonMetro saveChangesButton;
     public rsbuttom.RSButtonMetro searchButton;
     public java.awt.TextField searchTextField;
     public javax.swing.JTable tableSuspects;

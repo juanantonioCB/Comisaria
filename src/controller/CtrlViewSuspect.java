@@ -122,6 +122,7 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.nameSuspectLabel.setText(suspect.getName() + " " + suspect.getSurname1() + " " + suspect.getSurname2());
         guiViewSuspect.companionsList.removeAll();
         guiViewSuspect.emailsList.removeAll();
+        guiViewSuspect.imageLabel.setIcon(null);
         
         if (suspect.getPhoto() != null) {
             Image img = new ImageIcon(suspect.getPhoto().get(0)).getImage().getScaledInstance(guiViewSuspect.imageLabel.getWidth(), guiViewSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
