@@ -31,6 +31,15 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.searchButton.addActionListener(this);
         guiViewSuspect.reloadButton.addActionListener(this);
         guiViewSuspect.deleteButton.addActionListener(this);
+        guiViewSuspect.addCompanionButton.addActionListener(this);
+        guiViewSuspect.deleteCompanionButton.addActionListener(this);
+        guiViewSuspect.addEmailButton.addActionListener(this);
+        guiViewSuspect.addLicensePlatesButton.addActionListener(this);
+        guiViewSuspect.addPhoneNumberButton.addActionListener(this);
+        guiViewSuspect.deleteCompanionButton.addActionListener(this);
+        guiViewSuspect.deleteEmailButton.addActionListener(this);
+        guiViewSuspect.deleteLicensePlatesButton.addActionListener(this);
+        guiViewSuspect.deletePhoneNumberButton.addActionListener(this);
         guiViewSuspect.searchTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
