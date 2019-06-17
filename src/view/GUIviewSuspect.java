@@ -60,13 +60,15 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         deleteEmailButton = new rsbuttom.RSButtonMetro();
         addEmailButton = new rsbuttom.RSButtonMetro();
         emailsTextField = new javax.swing.JTextField();
-        addCompanionButton = new rsbuttom.RSButtonMetro();
-        deleteCompanionButton = new rsbuttom.RSButtonMetro();
-        companionsAllList = new java.awt.List();
+        addResidencieButton = new rsbuttom.RSButtonMetro();
+        deleteResidencieButton = new rsbuttom.RSButtonMetro();
         saveChangesButton = new rsbuttom.RSButtonMetro();
         currentSuspectLabel = new javax.swing.JLabel();
         addPhotoButton = new rsbuttom.RSButtonMetro();
         deletePhotoButton = new rsbuttom.RSButtonMetro();
+        residenciesList = new java.awt.List();
+        residenciesLabel = new javax.swing.JLabel();
+        residenciesTextField = new javax.swing.JTextField();
         searchTextField = new java.awt.TextField();
         searchButton = new rsbuttom.RSButtonMetro();
         reloadButton = new rsbuttom.RSButtonMetro();
@@ -138,9 +140,9 @@ public class GUIviewSuspect extends javax.swing.JPanel {
 
         addEmailButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
 
-        addCompanionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
+        addResidencieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
 
-        deleteCompanionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/delete.png"))); // NOI18N
+        deleteResidencieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/delete.png"))); // NOI18N
 
         saveChangesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/save.png"))); // NOI18N
         saveChangesButton.setText("GUARDAR CAMBIOS");
@@ -150,6 +152,8 @@ public class GUIviewSuspect extends javax.swing.JPanel {
         addPhotoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/add.png"))); // NOI18N
 
         deletePhotoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/trash.png"))); // NOI18N
+
+        residenciesLabel.setText("RESIDENCIAS");
 
         javax.swing.GroupLayout viewSuspectPanelLayout = new javax.swing.GroupLayout(viewSuspectPanel);
         viewSuspectPanel.setLayout(viewSuspectPanelLayout);
@@ -226,23 +230,34 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                                     .addComponent(phoneNumbersTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(320, 320, 320)))
                         .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, Short.MAX_VALUE)
+                            .addComponent(addPhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                             .addComponent(deletePhotoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(companionsList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(companionsLabel)
-                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                                .addComponent(addCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(companionsAllList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(388, 388, 388)
+                        .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                        .addGap(419, 419, 419)
-                        .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(companionsList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                                .addGap(241, 241, 241)
+                                .addComponent(companionsLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
+                                    .addComponent(residenciesList, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(addResidencieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(deleteResidencieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(30, 30, 30))
+                                .addComponent(residenciesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewSuspectPanelLayout.createSequentialGroup()
+                                .addComponent(residenciesLabel)
+                                .addGap(191, 191, 191)))))
                 .addContainerGap())
         );
         viewSuspectPanelLayout.setVerticalGroup(
@@ -319,20 +334,25 @@ public class GUIviewSuspect extends javax.swing.JPanel {
                         .addComponent(recordsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24)
-                .addComponent(companionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(viewSuspectPanelLayout.createSequentialGroup()
+                            .addComponent(companionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(companionsList, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addResidencieButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(viewSuspectPanelLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(deleteCompanionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(companionsList, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(companionsAllList, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(residenciesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(residenciesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(viewSuspectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteResidencieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residenciesList, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(saveChangesButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(27, 27, 27))
         );
 
         viewSuspect_jScrollPane.setViewportView(viewSuspectPanel);
@@ -392,22 +412,21 @@ public class GUIviewSuspect extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public rsbuttom.RSButtonMetro addCompanionButton;
     public rsbuttom.RSButtonMetro addEmailButton;
     public rsbuttom.RSButtonMetro addLicensePlatesButton;
     public rsbuttom.RSButtonMetro addPhoneNumberButton;
     public rsbuttom.RSButtonMetro addPhotoButton;
-    public java.awt.List companionsAllList;
+    public rsbuttom.RSButtonMetro addResidencieButton;
     public javax.swing.JLabel companionsLabel;
     public java.awt.List companionsList;
     public javax.swing.JLabel currentPhoto;
     public javax.swing.JLabel currentSuspectLabel;
     public rsbuttom.RSButtonMetro deleteButton;
-    public rsbuttom.RSButtonMetro deleteCompanionButton;
     public rsbuttom.RSButtonMetro deleteEmailButton;
     public rsbuttom.RSButtonMetro deleteLicensePlatesButton;
     public rsbuttom.RSButtonMetro deletePhoneNumberButton;
     public rsbuttom.RSButtonMetro deletePhotoButton;
+    public rsbuttom.RSButtonMetro deleteResidencieButton;
     private javax.swing.JLabel emailsLabel;
     public java.awt.List emailsList;
     public javax.swing.JTextField emailsTextField;
@@ -429,6 +448,9 @@ public class GUIviewSuspect extends javax.swing.JPanel {
     private javax.swing.JLabel recordsLabel;
     public javax.swing.JTextArea recordsTextArea;
     public rsbuttom.RSButtonMetro reloadButton;
+    public javax.swing.JLabel residenciesLabel;
+    public java.awt.List residenciesList;
+    public javax.swing.JTextField residenciesTextField;
     public rsbuttom.RSButtonMetro saveChangesButton;
     public rsbuttom.RSButtonMetro searchButton;
     public java.awt.TextField searchTextField;

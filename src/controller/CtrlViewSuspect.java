@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,12 +32,12 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.searchButton.addActionListener(this);
         guiViewSuspect.reloadButton.addActionListener(this);
         guiViewSuspect.deleteButton.addActionListener(this);
-        guiViewSuspect.addCompanionButton.addActionListener(this);
-        guiViewSuspect.deleteCompanionButton.addActionListener(this);
+        guiViewSuspect.addResidencieButton.addActionListener(this);
+        guiViewSuspect.deleteResidencieButton.addActionListener(this);
         guiViewSuspect.addEmailButton.addActionListener(this);
         guiViewSuspect.addLicensePlatesButton.addActionListener(this);
         guiViewSuspect.addPhoneNumberButton.addActionListener(this);
-        guiViewSuspect.deleteCompanionButton.addActionListener(this);
+        guiViewSuspect.deleteResidencieButton.addActionListener(this);
         guiViewSuspect.deleteEmailButton.addActionListener(this);
         guiViewSuspect.deleteLicensePlatesButton.addActionListener(this);
         guiViewSuspect.deletePhoneNumberButton.addActionListener(this);
@@ -122,6 +123,17 @@ public class CtrlViewSuspect implements ActionListener {
                 guiViewSuspect.emailsList.remove(guiViewSuspect.emailsList.getSelectedIndex());
             }
         }
+        if(e.getSource()==guiViewSuspect.addResidencieButton){
+            if(guiViewSuspect.residenciesTextField.getText().length()!=0){
+                guiViewSuspect.residenciesList.add(guiViewSuspect.residenciesTextField.getText());
+                guiViewSuspect.residenciesTextField.setText(null);
+            }
+        }
+        if(e.getSource()==guiViewSuspect.deleteResidencieButton){
+            if(guiViewSuspect.residenciesList.getSelectedIndex()!=-1){
+                guiViewSuspect.residenciesList.remove(guiViewSuspect.residenciesList.getSelectedIndex());
+            }
+        }
         if (e.getSource() == guiViewSuspect.saveChangesButton) {
             saveChanges();
         }
@@ -161,6 +173,7 @@ public class CtrlViewSuspect implements ActionListener {
         guiViewSuspect.companionsList.removeAll();
         guiViewSuspect.emailsList.removeAll();
         guiViewSuspect.imageLabel.setIcon(null);
+        guiViewSuspect.residenciesList.removeAll();
 
         if (suspect.getPhoto() != null) {
             Image img = new ImageIcon(suspect.getPhoto().get(0)).getImage().getScaledInstance(guiViewSuspect.imageLabel.getWidth(), guiViewSuspect.imageLabel.getHeight(), Image.SCALE_SMOOTH);
@@ -173,7 +186,6 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (suspect.getPhoneNumbers() != null) {
-
             for (int i = 0; i < suspect.getPhoneNumbers().size(); i++) {
                 guiViewSuspect.phoneNumbersList.add((String) suspect.getPhoneNumbers().get(i));
             }
@@ -184,7 +196,6 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (suspect.getFacts() != null) {
-
             guiViewSuspect.factsTextArea.setText(suspect.getFacts());
         }
         if (suspect.getRecords() != null) {
@@ -194,6 +205,11 @@ public class CtrlViewSuspect implements ActionListener {
             for (int i = 0; i < suspect.getCompanions().size(); i++) {
                 System.out.println(suspect.getCompanions().get(i));
                 guiViewSuspect.companionsList.add(suspect.getCompanions().get(i).toString());
+            }
+        }
+        if(suspect.getResidencies()!=null){
+            for (int i = 0; i < suspect.getResidencies().size(); i++) { 
+                guiViewSuspect.residenciesList.add((String) suspect.getResidencies().get(i));
             }
         }
     }
@@ -243,7 +259,19 @@ public class CtrlViewSuspect implements ActionListener {
     }
 
     private void saveChanges() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        /*Suspect s = new Suspect(0, 
+                suspect.getName(), 
+                suspect.getSurname1(), 
+                suspect.getSurname2(), 
+                suspect.getDNI(), 
+                Arrays.asList(guiViewSuspect.licensePlatesList.getItems()), 
+                Arrays.asList(guiViewSuspect..getItems()), 
+                phoneNumbers, 
+                emails, 
+                companions, 
+                records, 
+                facts, 
+                photo)*/
     }
 
 }

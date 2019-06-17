@@ -32,8 +32,15 @@ public class Consults extends Connect {
 
     public void insertSuspect(Suspect s, Integer id) {
         Connection con = getConnect();
-        String sql = "INSERT INTO Sospechosos (nombre, apellido1, apellido2, dni"
-                + ", antecedentes, hechos) values (?,?,?,?,?,?)";
+        String sql;
+        if (id == null) {
+            sql = "INSERT INTO Sospechosos (nombre, apellido1, apellido2, dni"
+                    + ", antecedentes, hechos) values (?,?,?,?,?,?)";
+        } else {
+            sql = "INSERT INTO Sospechosos (id, nombre, apellido1, apellido2, dni"
+                    + ", antecedentes, hechos) values (?,?,?,?,?,?,?)";
+        }
+
         String sqlLicensePlates = "INSERT INTO matriculas (matricula, idSospechoso) values (?,?)";
         String sqlResidencies = "INSERT INTO residencias (residencia, idSospechoso) values (?,?)";
         String sqlEmails = "INSERT INTO emails (email, idSospechoso) values (?,?)";
