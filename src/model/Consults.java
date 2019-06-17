@@ -32,14 +32,7 @@ public class Consults extends Connect {
 
     public void insertSuspect(Suspect s, Integer id) {
         Connection con = getConnect();
-        String sql;
-        if (id == null) {
-            sql = "INSERT INTO Sospechosos (nombre, apellido1, apellido2, dni"
-                    + ", antecedentes, hechos) values (?,?,?,?,?,?)";
-        } else {
-            sql = "INSERT INTO Sospechosos (id, nombre, apellido1, apellido2, dni"
-                    + ", antecedentes, hechos) values (?,?,?,?,?,?,?)";
-        }
+
 
         String sqlLicensePlates = "INSERT INTO matriculas (matricula, idSospechoso) values (?,?)";
         String sqlResidencies = "INSERT INTO residencias (residencia, idSospechoso) values (?,?)";
@@ -50,17 +43,39 @@ public class Consults extends Connect {
         int last_inserted_id = -1;
 
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, s.getName());
-            ps.setString(2, s.getSurname1());
-            ps.setString(3, s.getSurname2());
-            ps.setString(4, s.getDNI());
-            ps.setString(5, s.getRecords());
-            ps.setString(6, s.getFacts());
-            ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                last_inserted_id = rs.getInt(1);
+            if (id == null) {
+                String sql = "INSERT INTO Sospechosos (nombre, apellido1, apellido2, dni"
+                        + ", antecedentes, hechos) values (?,?,?,?,?,?)";
+
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, s.getName());
+                ps.setString(2, s.getSurname1());
+                ps.setString(3, s.getSurname2());
+                ps.setString(4, s.getDNI());
+                ps.setString(5, s.getRecords());
+                ps.setString(6, s.getFacts());
+                ps.execute();
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    last_inserted_id = rs.getInt(1);
+                }
+            } else {
+                String sql = "INSERT INTO Sospechosos (id,nombre, apellido1, apellido2, dni"
+                        + ", antecedentes, hechos) values (?,?,?,?,?,?,?)";
+
+                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, id);
+                ps.setString(2, s.getName());
+                ps.setString(3, s.getSurname1());
+                ps.setString(4, s.getSurname2());
+                ps.setString(5, s.getDNI());
+                ps.setString(6, s.getRecords());
+                ps.setString(7, s.getFacts());
+                ps.execute();
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    last_inserted_id = rs.getInt(1);
+                }
             }
         } catch (SQLException ex) {
             System.err.println(ex);

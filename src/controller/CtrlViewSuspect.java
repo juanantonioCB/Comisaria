@@ -123,14 +123,14 @@ public class CtrlViewSuspect implements ActionListener {
                 guiViewSuspect.emailsList.remove(guiViewSuspect.emailsList.getSelectedIndex());
             }
         }
-        if(e.getSource()==guiViewSuspect.addResidencieButton){
-            if(guiViewSuspect.residenciesTextField.getText().length()!=0){
+        if (e.getSource() == guiViewSuspect.addResidencieButton) {
+            if (guiViewSuspect.residenciesTextField.getText().length() != 0) {
                 guiViewSuspect.residenciesList.add(guiViewSuspect.residenciesTextField.getText());
                 guiViewSuspect.residenciesTextField.setText(null);
             }
         }
-        if(e.getSource()==guiViewSuspect.deleteResidencieButton){
-            if(guiViewSuspect.residenciesList.getSelectedIndex()!=-1){
+        if (e.getSource() == guiViewSuspect.deleteResidencieButton) {
+            if (guiViewSuspect.residenciesList.getSelectedIndex() != -1) {
                 guiViewSuspect.residenciesList.remove(guiViewSuspect.residenciesList.getSelectedIndex());
             }
         }
@@ -207,8 +207,8 @@ public class CtrlViewSuspect implements ActionListener {
                 guiViewSuspect.companionsList.add(suspect.getCompanions().get(i).toString());
             }
         }
-        if(suspect.getResidencies()!=null){
-            for (int i = 0; i < suspect.getResidencies().size(); i++) { 
+        if (suspect.getResidencies() != null) {
+            for (int i = 0; i < suspect.getResidencies().size(); i++) {
                 guiViewSuspect.residenciesList.add((String) suspect.getResidencies().get(i));
             }
         }
@@ -259,19 +259,26 @@ public class CtrlViewSuspect implements ActionListener {
     }
 
     private void saveChanges() {
-        /*Suspect s = new Suspect(0, 
-                suspect.getName(), 
-                suspect.getSurname1(), 
-                suspect.getSurname2(), 
-                suspect.getDNI(), 
-                Arrays.asList(guiViewSuspect.licensePlatesList.getItems()), 
-                Arrays.asList(guiViewSuspect..getItems()), 
-                phoneNumbers, 
-                emails, 
-                companions, 
-                records, 
-                facts, 
-                photo)*/
+        int id = Integer.parseInt(guiViewSuspect.currentSuspectLabel.getText());
+        if (!guiViewSuspect.currentSuspectLabel.getText().equals("-1")) {
+            Suspect s = new Suspect(0,
+                    suspect.getName(),
+                    suspect.getSurname1(),
+                    suspect.getSurname2(),
+                    suspect.getDNI(),
+                    new ArrayList<String>(Arrays.asList(guiViewSuspect.licensePlatesList.getItems())),
+                    new ArrayList<String>(Arrays.asList(guiViewSuspect.residenciesList.getItems())),
+                    new ArrayList<String>(Arrays.asList(guiViewSuspect.phoneNumbersList.getItems())),
+                    new ArrayList<String>(Arrays.asList(guiViewSuspect.emailsList.getItems())),
+                    suspect.getCompanions(),
+                    guiViewSuspect.recordsTextArea.getText(),
+                    guiViewSuspect.factsTextArea.getText(),
+                    suspect.getPhoto());
+            
+            consults.deleteSuspect(id);
+            consults.insertSuspect(s,id);
+        }
+
     }
 
 }
