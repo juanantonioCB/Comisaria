@@ -24,6 +24,7 @@ public class CtrlRelatedSuspects implements ActionListener {
         completeTable(consults.getSuspects());
         relatedSuspects.relatedSuspectsList.setModel(listSuspectsRelatedModel);
         relatedSuspects.loadRelatedSuspectsButton.addActionListener(this);
+        relatedSuspects.reloadButton.addActionListener(this);
         
     }
     
@@ -31,6 +32,9 @@ public class CtrlRelatedSuspects implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == relatedSuspects.loadRelatedSuspectsButton) {
             loadRelatedSuspects((int) relatedSuspects.tableSuspects.getValueAt(relatedSuspects.tableSuspects.getSelectedRow(), 0));
+        }
+        if(e.getSource()==relatedSuspects.reloadButton){
+            completeTable(consults.getSuspects());
         }
     }
 
@@ -63,10 +67,14 @@ public class CtrlRelatedSuspects implements ActionListener {
     }
     
     private void loadRelatedSuspects(int id) {
+        listSuspectsRelatedModel.removeAllElements();
         ArrayList<Suspect> s = consults.getRelatedSuspects(id);
         if (s != null) {
             for (int i = 0; i < s.size(); i++) {
-                listSuspectsRelatedModel.addElement(s.get(i));
+                if(s.get(i).getId()!=id){
+                    listSuspectsRelatedModel.addElement(s.get(i));
+                }
+                
             }
         }
     }

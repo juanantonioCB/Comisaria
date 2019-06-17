@@ -85,10 +85,10 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
         if (e.getSource() == guiViewSuspect.nextPhotoButton) {
-            showImage("next");
+            manageImages("next");
         }
         if (e.getSource() == guiViewSuspect.previousPhotoButton) {
-            showImage("previous");
+            manageImages("previous");
         }
         if (e.getSource() == guiViewSuspect.addLicensePlatesButton) {
             if (guiViewSuspect.licensePlatesTextField.getText().length() != 0) {
@@ -137,6 +137,7 @@ public class CtrlViewSuspect implements ActionListener {
         if (e.getSource() == guiViewSuspect.saveChangesButton) {
             saveChanges();
         }
+        
     }
 
     private void deleteSuspect(int id) {
@@ -203,7 +204,6 @@ public class CtrlViewSuspect implements ActionListener {
         }
         if (suspect.getCompanions() != null) {
             for (int i = 0; i < suspect.getCompanions().size(); i++) {
-                System.out.println(suspect.getCompanions().get(i));
                 guiViewSuspect.companionsList.add(suspect.getCompanions().get(i).toString());
             }
         }
@@ -214,7 +214,7 @@ public class CtrlViewSuspect implements ActionListener {
         }
     }
 
-    private void showImage(String option) {
+    private void manageImages(String option) {
         if (suspect.getPhoto() != null) {
             int currentPhoto = Integer.parseInt(guiViewSuspect.currentPhoto.getText());
             switch (option) {
@@ -233,18 +233,11 @@ public class CtrlViewSuspect implements ActionListener {
                         guiViewSuspect.imageLabel.setIcon(new ImageIcon(img));
                         guiViewSuspect.currentPhoto.setText(String.valueOf(currentPhoto - 1));
                     }
-                    break;
-                case "remove":
-                    if (currentPhoto > -1) {
-                        suspect.getPhoto().remove(currentPhoto);
-                        guiViewSuspect.currentPhoto.setText("-1");
-                        guiViewSuspect.imageLabel.setIcon(null);
-                    }
-                    break;
+                    break;   
             }
         }
     }
-
+    
     private void listSearchSuspect(String search) {
         ArrayList<Suspect> suspects = null;
         suspects = consults.searchSuspect(search);
@@ -274,9 +267,9 @@ public class CtrlViewSuspect implements ActionListener {
                     guiViewSuspect.recordsTextArea.getText(),
                     guiViewSuspect.factsTextArea.getText(),
                     suspect.getPhoto());
-            
+
             consults.deleteSuspect(id);
-            consults.insertSuspect(s,id);
+            consults.insertSuspect(s, id);
         }
 
     }

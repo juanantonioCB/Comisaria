@@ -33,6 +33,7 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
         loadRelatedSuspectsButton = new rsbuttom.RSButtonMetro();
         jScrollPane2 = new javax.swing.JScrollPane();
         relatedSuspectsList = new javax.swing.JList<>();
+        reloadButton = new rsbuttom.RSButtonMetro();
 
         background.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -60,6 +61,8 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(relatedSuspectsList);
 
+        reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/reload.png"))); // NOI18N
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -68,20 +71,27 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(loadRelatedSuspectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(reloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(278, 278, 278)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(350, 350, 350)
+                        .addComponent(loadRelatedSuspectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(reloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(loadRelatedSuspectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -108,6 +118,7 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     public rsbuttom.RSButtonMetro loadRelatedSuspectsButton;
     public javax.swing.JList<String> relatedSuspectsList;
+    public rsbuttom.RSButtonMetro reloadButton;
     public javax.swing.JTable tableSuspects;
     // End of variables declaration//GEN-END:variables
 }

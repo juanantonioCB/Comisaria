@@ -33,7 +33,6 @@ public class Consults extends Connect {
     public void insertSuspect(Suspect s, Integer id) {
         Connection con = getConnect();
 
-
         String sqlLicensePlates = "INSERT INTO matriculas (matricula, idSospechoso) values (?,?)";
         String sqlResidencies = "INSERT INTO residencias (residencia, idSospechoso) values (?,?)";
         String sqlEmails = "INSERT INTO emails (email, idSospechoso) values (?,?)";
@@ -62,8 +61,7 @@ public class Consults extends Connect {
             } else {
                 String sql = "INSERT INTO Sospechosos (id,nombre, apellido1, apellido2, dni"
                         + ", antecedentes, hechos) values (?,?,?,?,?,?,?)";
-
-                PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = con.prepareStatement(sql);
                 ps.setInt(1, id);
                 ps.setString(2, s.getName());
                 ps.setString(3, s.getSurname1());
@@ -73,9 +71,9 @@ public class Consults extends Connect {
                 ps.setString(7, s.getFacts());
                 ps.execute();
                 ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    last_inserted_id = rs.getInt(1);
-                }
+
+                last_inserted_id = id;
+
             }
         } catch (SQLException ex) {
             System.err.println(ex);
@@ -525,6 +523,7 @@ public class Consults extends Connect {
 
     public Suspect getSuspectFromBBDD(int idToSearch) {
         try {
+            
             Suspect s = null;
 
             String SqlQuery = "SELECT s.id, s.nombre, s.apellido1, \n"
@@ -550,10 +549,10 @@ public class Consults extends Connect {
             HashSet<byte[]> fotos = new HashSet<>();
             while (rs.next()) {
                 correos.add(rs.getString("email"));
+                
                 matriculas.add(rs.getString("matricula"));
                 residencias.add(rs.getString("residencia"));
                 telefonos.add(rs.getString("telefono"));
-                //fotos.add((rs.getBytes("foto")));
 
                 if (rs.isLast()) {
                     Blob blob = rs.getBlob("foto");

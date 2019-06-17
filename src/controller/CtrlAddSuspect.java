@@ -264,6 +264,7 @@ public class CtrlAddSuspect implements ActionListener {
         listCompanionsAddModel.removeAllElements();
         listCompanionsModel.removeAllElements();
         photos = null;
+        guiAddSuspect.imageLabel.setIcon(null);
     }
 
     private void addSuspectsCompanion() {
@@ -280,10 +281,8 @@ public class CtrlAddSuspect implements ActionListener {
         Matcher dniM = dniExpresion.matcher(dni);
         Matcher nieM = dniExpresion.matcher(dni);
         if (dniM.matches() || nieM.matches()) {
-            System.out.println(true);
             return true;
         } else {
-            System.out.println(false);
             return false;
         }
     }
