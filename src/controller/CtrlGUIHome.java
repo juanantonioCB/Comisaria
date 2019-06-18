@@ -53,6 +53,7 @@ public class CtrlGUIHome implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //se añade el panel correspondiente al contentPanel
         if (e.getSource() == this.gui.inicioButton) {
             CtrlHomePanel.getGuiHomePanel().setSize(this.gui.contentPanel.getWidth(), this.gui.getHeight());
             this.gui.contentPanel.removeAll();

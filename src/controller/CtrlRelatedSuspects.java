@@ -45,6 +45,11 @@ public class CtrlRelatedSuspects implements ActionListener {
         return relatedSuspects;
     }
     
+    /**
+     * se completa la tabla con el id, nombre, apellidos y dni de los sospechosos.
+     * @param s ArrayList con los sospechosos
+     */
+    
     private void completeTable(ArrayList<Suspect> s) {
         DefaultTableModel model = new DefaultTableModel(new Object[][]{
             {null, null, null, null},},
@@ -56,7 +61,6 @@ public class CtrlRelatedSuspects implements ActionListener {
             for (int i = 0; i < s.size() - 1; i++) {
                 model.addRow(new Object[][]{{null, null, null, null}});
             }
-            
             for (int x = 0; x < s.size(); x++) {
                 relatedSuspects.tableSuspects.setValueAt(s.get(x).getId(), x, 0);
                 relatedSuspects.tableSuspects.setValueAt(s.get(x).getName(), x, 1);
@@ -66,6 +70,11 @@ public class CtrlRelatedSuspects implements ActionListener {
         }
     }
     
+    /**
+     * carga en un jlist los sospechosos relacionados con el id que se pasa
+     * @param id id del sospechoso a buscar relacionados
+     */
+    
     private void loadRelatedSuspects(int id) {
         listSuspectsRelatedModel.removeAllElements();
         ArrayList<Suspect> s = consults.getRelatedSuspects(id);
@@ -73,10 +82,8 @@ public class CtrlRelatedSuspects implements ActionListener {
             for (int i = 0; i < s.size(); i++) {
                 if(s.get(i).getId()!=id){
                     listSuspectsRelatedModel.addElement(s.get(i));
-                }
-                
+                }      
             }
         }
     }
-    
 }

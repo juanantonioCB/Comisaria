@@ -139,6 +139,11 @@ public class CtrlViewSuspect implements ActionListener {
         }
         
     }
+    
+    /**
+     * elimina el sospechoso correspondiente con el id que se pasa por parámetro
+     * @param id 
+     */
 
     private void deleteSuspect(int id) {
         consults.deleteSuspect(id);
@@ -159,7 +164,10 @@ public class CtrlViewSuspect implements ActionListener {
         }
 
     }
-
+    /**
+     * Completa todos los campos del sospechoso.
+     * @param id id del sospechoso a cargar
+     */
     private void loadSuspect(int id) {
         suspect = consults.getSuspectFromBBDD(id);
         guiViewSuspect.currentSuspectLabel.setText(String.valueOf(id));
@@ -214,6 +222,12 @@ public class CtrlViewSuspect implements ActionListener {
         }
     }
 
+    /**
+     * controla el label de las imágenes
+     * @param option next: imagen siguiente
+     * @param option previous: imagen anterior
+     */
+    
     private void manageImages(String option) {
         if (suspect.getPhoto() != null) {
             int currentPhoto = Integer.parseInt(guiViewSuspect.currentPhoto.getText());
@@ -237,7 +251,11 @@ public class CtrlViewSuspect implements ActionListener {
             }
         }
     }
-    
+    /**
+     * Completa la tabla con los sospechosos que encuentra.
+     * @param search recibe un string con el sospechoso a buscar. Busca por nombre,
+     * apellidos y dni
+     */
     private void listSearchSuspect(String search) {
         ArrayList<Suspect> suspects = null;
         suspects = consults.searchSuspect(search);
@@ -251,6 +269,10 @@ public class CtrlViewSuspect implements ActionListener {
         return guiViewSuspect;
     }
 
+    /**
+     * actualiza el sospechoso.
+     */
+    
     private void saveChanges() {
         int id = Integer.parseInt(guiViewSuspect.currentSuspectLabel.getText());
         if (!guiViewSuspect.currentSuspectLabel.getText().equals("-1")) {

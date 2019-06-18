@@ -34,6 +34,7 @@ public class CtrlAddSuspect implements ActionListener {
     private ArrayList<byte[]> photos = null;
     private ListIterator<byte[]> iterator = null;
     private ArrayList<Suspect> suspects = consults.getSuspects();
+    //ESTOS SON LOS MODELOS QUE IRÁN APLICADOS A LAS LISTAS.
     private DefaultListModel listCompanionsAddModel = new DefaultListModel<>();
     private DefaultListModel listCompanionsModel = new DefaultListModel<>();
 
@@ -57,6 +58,7 @@ public class CtrlAddSuspect implements ActionListener {
         guiAddSuspect.companionsListAdd.setModel(listCompanionsAddModel);
         guiAddSuspect.companionsList.setModel(listCompanionsModel);
         guiAddSuspect.deleteResidenciesButton.addActionListener(this);
+        //SE HACE INVISIBLE EL LABEL QUE MARCARÁ LA FOTO QUE TENEMOS SELECCIONADA
         guiAddSuspect.currentPhoto.setVisible(false);
 
     }
@@ -148,6 +150,13 @@ public class CtrlAddSuspect implements ActionListener {
         }
     }
 
+    /**
+     * MUESTRA LAS IMAGENES UNA VEZ CARGADAS
+     * @param option next: foto siguiente, previous foto atrás
+     * @param option previous: foto atrás
+     * @param option remove: eliminar la foto actual
+     */
+    
     private void showImage(String option) {
         if (photos != null) {
             int currentPhoto = Integer.parseInt(guiAddSuspect.currentPhoto.getText());
@@ -180,6 +189,10 @@ public class CtrlAddSuspect implements ActionListener {
 
     }
 
+    /**
+     * Carga la imagen. Abre jfilechooser y agrega al arraylist de imágenes
+     */
+    
     private void loadImage() {
         if (photos == null) {
             photos = new ArrayList<>();
@@ -204,6 +217,10 @@ public class CtrlAddSuspect implements ActionListener {
         }
 
     }
+    
+    /**
+     * guarda en la base de datos el sospechoso
+     */
 
     private void saveSuspect() {
         if (guiAddSuspect.nameTextField.getText().length() > 3
@@ -248,6 +265,10 @@ public class CtrlAddSuspect implements ActionListener {
         }
     }
 
+    /**
+     * limpia todos los campos. Se ejecuta después de guardar al sospechoso.
+     */
+    
     private void clearForms() {
         guiAddSuspect.nameTextField.setText(null);
         guiAddSuspect.surname1TextField.setText(null);
@@ -266,6 +287,10 @@ public class CtrlAddSuspect implements ActionListener {
         photos = null;
         guiAddSuspect.imageLabel.setIcon(null);
     }
+    
+    /**
+     * Rellena el jlist con todos los sospechosos disponibles para poder añadirlos como acompañantes.
+     */
 
     private void addSuspectsCompanion() {
         if (suspects != null) {
@@ -274,6 +299,12 @@ public class CtrlAddSuspect implements ActionListener {
             }
         }
     }
+    
+    /**
+     * validador de dni y nie
+     * @param dni
+     * @return true si es válido o false si no lo es
+     */
 
     private boolean checkDNI(String dni) {
         Pattern dniExpresion = Pattern.compile("^(\\d{8})([A-Z|a-z])$");

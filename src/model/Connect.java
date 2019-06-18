@@ -35,6 +35,9 @@ public abstract class Connect {
         return con;
     }
 
+    /**
+     * crea las tablas si no existen.
+     */
     private void start() {
         String sql = "create table if not exists Sospechosos (\n"
                 + "	id int auto_increment,\n"

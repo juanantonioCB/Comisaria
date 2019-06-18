@@ -231,9 +231,7 @@ public class Suspect {
         return photos;
     }
 
-    /**
-     * @param photo the photo to set
-     */
+    
     public void setPhoto(ArrayList<byte[]> photos) {
         this.photos = photos;
     }

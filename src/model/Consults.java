@@ -30,6 +30,11 @@ public class Consults extends Connect {
         return consults;
     }
 
+    /**
+     * inserta el sospechoso en la base de datos.
+     * @param s sospechoso a insertar.
+     * @param id id del sospechoso o null si el id lo generará la base de datos.
+     */
     public void insertSuspect(Suspect s, Integer id) {
         Connection con = getConnect();
 
@@ -236,6 +241,10 @@ public class Consults extends Connect {
         return images;
     }
 
+    /**
+     * 
+     * @return ArrayList de Suspect con todos los sospechosos que hay en la BBDD.
+     */
     public ArrayList<Suspect> getSuspects() {
         try {
             ArrayList<Suspect> suspects = new ArrayList<>();
@@ -322,6 +331,11 @@ public class Consults extends Connect {
         }
     }
 
+    /**
+     * 
+     * @param idRelated id del sospechoso a obtener los sospechosos relacionados
+     * @return ArrayList de Suspect con todos los sospechosos relacionados.
+     */
     public ArrayList<Suspect> getRelatedSuspects(int idRelated) {
         try {
             ArrayList<Suspect> suspects = new ArrayList<>();
@@ -412,6 +426,11 @@ public class Consults extends Connect {
         }
     }
 
+    /**
+     * Función que busca sospechosos por nombre, apellidos o dni.
+     * @param search Cadena con el contenido a buscar.
+     * @return ArrayList de Suspect que coinciden con dicha cadena.
+     */
     public ArrayList<Suspect> searchSuspect(String search) {
         try {
             ArrayList<Suspect> suspects = new ArrayList<>();
@@ -499,6 +518,12 @@ public class Consults extends Connect {
             return null;
         }
     }
+    /**
+     * Busca los acompañantes de un sospechoso.
+     * @param id id del sospechoso a buscar acompañantes.
+     * @return ArrayList de Suspect con los acompañantes que contiene el sospechoso con id pasado por 
+     * parámetro.
+     */
 
     public ArrayList<Suspect> getCompanionsOfSuspect(int id) {
         ArrayList<Suspect> companions = new ArrayList<>();
@@ -521,6 +546,11 @@ public class Consults extends Connect {
         }
     }
 
+    /**
+     * Devuelve un sospechoso
+     * @param idToSearch id del sospechoso.
+     * @return devuelve el sospechoso si existe o null si no existe.
+     */
     public Suspect getSuspectFromBBDD(int idToSearch) {
         try {
             
