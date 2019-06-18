@@ -26,7 +26,6 @@ public class CtrlGUIHome implements ActionListener {
         this.gui.suspectsRelatedButton.addActionListener(this);
         this.gui.aboutButton.addActionListener(this);
         this.gui.viewSuspectsButton.addActionListener(this);
-        this.gui.setResizable(false);
     }
 
     public void start() throws Exception {

@@ -30,10 +30,10 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
         background = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSuspects = new javax.swing.JTable();
-        loadRelatedSuspectsButton = new rsbuttom.RSButtonMetro();
         jScrollPane2 = new javax.swing.JScrollPane();
         relatedSuspectsList = new javax.swing.JList<>();
         reloadButton = new rsbuttom.RSButtonMetro();
+        jLabel1 = new javax.swing.JLabel();
 
         background.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -56,12 +56,11 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableSuspects);
 
-        loadRelatedSuspectsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/load.png"))); // NOI18N
-        loadRelatedSuspectsButton.setText("Cargar Sospechosos");
-
         jScrollPane2.setViewportView(relatedSuspectsList);
 
         reloadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/reload.png"))); // NOI18N
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icons/flecha_abajo.png"))); // NOI18N
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -75,11 +74,11 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addComponent(reloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(278, 278, 278)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(425, 425, 425)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(loadRelatedSuspectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(297, 297, 297)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
@@ -92,11 +91,11 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(reloadButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
-                .addComponent(loadRelatedSuspectsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -114,9 +113,9 @@ public class GUIRelatedSuspects extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel background;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public rsbuttom.RSButtonMetro loadRelatedSuspectsButton;
     public javax.swing.JList<String> relatedSuspectsList;
     public rsbuttom.RSButtonMetro reloadButton;
     public javax.swing.JTable tableSuspects;

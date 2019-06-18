@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public abstract class Connect {
 
-    private String db = "comisaria";
+    private String db = "test";
     private String user = "sa";
     private String password = "";
     private String url = "jdbc:h2:tcp://localhost/~/" + db;

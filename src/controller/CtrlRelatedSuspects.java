@@ -1,9 +1,13 @@
 package controller;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Consults;
 import model.Suspect;
@@ -23,16 +27,24 @@ public class CtrlRelatedSuspects implements ActionListener {
         relatedSuspects = new GUIRelatedSuspects();
         completeTable(consults.getSuspects());
         relatedSuspects.relatedSuspectsList.setModel(listSuspectsRelatedModel);
-        relatedSuspects.loadRelatedSuspectsButton.addActionListener(this);
         relatedSuspects.reloadButton.addActionListener(this);
+        relatedSuspects.tableSuspects.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent mouseEvent) {
+                JTable table = (JTable) mouseEvent.getSource();
+                Point point = mouseEvent.getPoint();
+                int row = table.rowAtPoint(point);
+                if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
+                    // your valueChanged overridden method 
+                    System.out.println((int) relatedSuspects.tableSuspects.getValueAt(row, 0));
+                    loadRelatedSuspects((int) relatedSuspects.tableSuspects.getValueAt(row, 0));
+                }
+            }
+        });
         
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == relatedSuspects.loadRelatedSuspectsButton) {
-            loadRelatedSuspects((int) relatedSuspects.tableSuspects.getValueAt(relatedSuspects.tableSuspects.getSelectedRow(), 0));
-        }
         if(e.getSource()==relatedSuspects.reloadButton){
             completeTable(consults.getSuspects());
         }
