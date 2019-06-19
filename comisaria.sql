@@ -1,7 +1,7 @@
 
 create database Comisaria;
 use Comisaria;
-create table Sospechosos(
+create table if not exists Sospechosos (
 	id int auto_increment,
 	nombre varchar(255),
 	apellido1 varchar(255),
@@ -10,18 +10,11 @@ create table Sospechosos(
 	antecedentes varchar(255),
 	hechos varchar(255),
 	primary key(id)
-	ON DELETE CASCADE
 );
 
-create table Fotos(
-	id int auto_increment primary key,
-	foto blob,
-	idSospechoso int,
-	foreign key (idSospechoso) references Sospechosos(id)
-	ON DELETE CASCADE
-)
 
-create table Matriculas(
+
+create table if not exists Matriculas(
 	id int auto_increment primary key,
 	matricula varchar(255),
 	idSospechoso int,
@@ -29,7 +22,14 @@ create table Matriculas(
 	ON DELETE CASCADE
 );
 
-create table Residencias(
+create table if not exists Fotos(
+	id int auto_increment primary key,
+	foto blob,
+	idSospechoso int,
+	foreign key (idSospechoso) references Sospechosos(id)
+	ON DELETE CASCADE
+);
+create table if not exists Residencias(
 	id int auto_increment primary key,
 	idSospechoso int,
 	residencia varchar(255),
@@ -37,7 +37,7 @@ create table Residencias(
 	ON DELETE CASCADE
 );
 
-create table Telefonos(
+create table if not exists Telefonos(
 	id int auto_increment primary key,
 	idSospechoso int,
 	telefono varchar(255),
@@ -45,7 +45,7 @@ create table Telefonos(
 	ON DELETE CASCADE
 );
 
-create table Acompañantes(
+create table if not exists Acompañantes(
 	id1 int,
 	id2 int,
 	primary key(id1,id2),
@@ -56,7 +56,7 @@ create table Acompañantes(
 
 
 
-create table emails(
+create table if not exists emails(
 	id int auto_increment primary key,
 	idSospechoso int,
 	email varchar(255),
